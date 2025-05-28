@@ -4,7 +4,7 @@ import electron from "vite-plugin-electron"
 import renderer from "vite-plugin-electron-renderer"
 import UnoCSS from "unocss/vite"
 import { fileURLToPath } from "node:url"
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import path from "node:path"
 
 export default defineConfig((configEnv) => {
@@ -14,8 +14,8 @@ export default defineConfig((configEnv) => {
       UnoCSS(),
       react(),
       createSvgIconsPlugin({
-        iconDirs: [path.resolve(process.cwd(), 'src/assets/svg-icons')],
-        symbolId: `${viteEnv.VITE_ICON_LOCAL_PREFIX}-[name]`
+        iconDirs: [path.resolve(process.cwd(), "src/assets/svg-icons")],
+        symbolId: `${viteEnv.VITE_ICON_LOCAL_PREFIX}-[name]`,
       }),
       electron([
         {
@@ -33,7 +33,7 @@ export default defineConfig((configEnv) => {
     resolve: {
       alias: {
         "~": fileURLToPath(new URL("./", import.meta.url)),
-        "@": fileURLToPath(new URL('./src', import.meta.url)),
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
   }
