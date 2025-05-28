@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 function createWindow() {
-  console.log(path.join(__dirname, "../preload.js"), 'preload')
+  console.log(path.join(__dirname, "./preload.js"), "preload")
   const win = new BrowserWindow({
     width: 800,
     height: 600,
