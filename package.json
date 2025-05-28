@@ -1,21 +1,60 @@
 {
   "name": "electron-react-template",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist-electron/main.js",
+  "description": "electron react template",
+  "author": "Coke <jock74608@gmail.com>",
+  "homepage": "https://github.com/GJCoke/electron-react-template.git",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && electron-builder --mac --win --linux",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write .",
     "commit": "sa git-commit",
     "prepare": "simple-git-hooks"
   },
+  "build": {
+    "appId": "com.example.electron",
+    "productName": "electron-react-template",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Development"
+    }
+  },
   "dependencies": {
+    "@iconify/react": "^6.0.0",
     "@unocss/preset-wind3": "^66.1.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "vite-plugin-svg-icons": "^2.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -29,6 +68,7 @@
     "@unocss/vite": "^66.1.2",
     "@vitejs/plugin-react": "^4.4.1",
     "electron": "^36.3.1",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.25.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",

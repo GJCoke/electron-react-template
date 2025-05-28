@@ -1,5 +1,10 @@
 {
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
   "files": [],
-  "include": ["src", "electron"],
+  "include": ["src", "electron", "src/typings"],
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

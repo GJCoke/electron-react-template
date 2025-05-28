@@ -2,7 +2,7 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": ["ES2023", "ES2015"],
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -12,7 +12,9 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "types",
 
     /* Linting */
     "strict": true,
