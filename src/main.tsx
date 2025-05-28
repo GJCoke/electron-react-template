@@ -5,8 +5,11 @@ import App from "./App.tsx"
 import "uno.css"
 import "./index.css"
 
-console.log(window.electronAPI?.ping())
-
+async function test() {
+  const c1 = await window.electronAPI?.ping()
+  console.log(c1)
+}
+test()
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

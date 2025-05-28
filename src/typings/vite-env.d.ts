@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 interface Window {
   electronAPI?: {
-    ping: () => string
+    ping: () => Promise<string>
   }
 }
 
