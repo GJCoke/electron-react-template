@@ -19,14 +19,31 @@ export default defineConfig((configEnv) => {
       }),
       electron([
         {
-          entry: "electron/main.ts",
+          entry: 'electron/main/index.ts',
+          vite: {
+            build: {
+              outDir: 'dist-electron/main',
+              rollupOptions: {
+                output: {
+                  entryFileNames: 'index.js',
+                }
+              }
+            }
+          }
         },
         {
-          entry: "electron/preload.ts",
-          onstart: (options) => {
-            options.reload()
-          },
-        },
+          entry: 'electron/preload/index.ts',
+          vite: {
+            build: {
+              outDir: 'dist-electron/preload',
+              rollupOptions: {
+                output: {
+                  entryFileNames: 'index.js',
+                }
+              }
+            }
+          }
+        }
       ]),
       renderer(),
     ],

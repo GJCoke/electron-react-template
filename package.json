@@ -2,7 +2,7 @@
   "name": "electron-react-template",
   "private": true,
   "version": "0.0.1",
-  "main": "dist-electron/main.js",
+  "main": "dist-electron/main/index.js",
   "description": "electron react template",
   "author": "Coke <jock74608@gmail.com>",
   "homepage": "https://github.com/GJCoke/electron-react-template.git",
