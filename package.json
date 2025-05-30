@@ -52,6 +52,7 @@
   "dependencies": {
     "@iconify/react": "^6.0.0",
     "@unocss/preset-wind3": "^66.1.2",
+    "antd": "^5.25.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "vite-plugin-svg-icons": "^2.0.1"

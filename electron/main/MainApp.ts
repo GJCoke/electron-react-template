@@ -13,6 +13,7 @@ export class MainApp {
 
     this.registerEvents()
     this.registerIpc()
+    this.registerOn()
   }
 
   private registerEvents() {
@@ -31,14 +32,20 @@ export class MainApp {
     this.ipcHandler.register("ping", () => "pong1")
   }
 
+  private registerOn() {
+    this.ipcHandler.on("window:maximize", () => this.windowManager.maximize("main"))
+    this.ipcHandler.on("window:minimize", () => this.windowManager.minimize("main"))
+    this.ipcHandler.on("window:toggleMaximize", () => this.windowManager.toggleMaximize("main"))
+  }
+
   private createMainWindow() {
     const primaryDisplay = screen.getPrimaryDisplay()
     const { width, height } = primaryDisplay.workAreaSize
 
     const windowWidth = Math.floor(width * 0.8)
     const windowHeight = Math.floor(height * 0.8)
-    const minWidth = Math.floor(width * 0.5)
-    const minHeight = Math.floor(height * 0.5)
+    const minWidth = Math.floor(width * 0.6)
+    const minHeight = Math.floor(height * 0.6)
 
     this.windowManager.createWindow({
       key: "main",
@@ -47,6 +54,9 @@ export class MainApp {
         height: windowHeight,
         minWidth: minWidth,
         minHeight: minHeight,
+        frame: false,
+        titleBarStyle: 'hiddenInset',
+        trafficLightPosition: { x: 8, y: 14 }
       },
     })
   }

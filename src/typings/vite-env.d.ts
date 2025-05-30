@@ -2,6 +2,10 @@
 interface Window {
   electronAPI?: {
     ping: () => Promise<string>
+    maximize: () => void
+    minimize: () => void
+    toggleMaximize: () => void
+    close: () => void
   }
 }
 

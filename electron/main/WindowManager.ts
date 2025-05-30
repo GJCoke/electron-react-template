@@ -45,6 +45,40 @@ export class WindowManager {
     return this.windows.get(key)
   }
 
+  minimize(key: string) {
+    const win = this.windows.get(key)
+    if (win && !win.isMinimized()) {
+      win.minimize()
+    }
+  }
+
+  maximize(key: string) {
+    const win = this.windows.get(key)
+    if (win && !win.isMaximized()) {
+      win.maximize()
+    }
+  }
+
+  restore(key: string) {
+    const win = this.windows.get(key)
+    if (win && win.isMinimized()) {
+      win.restore()
+    } else if (win?.isMaximized()) {
+      win.unmaximize()
+    }
+  }
+
+  toggleMaximize(key: string) {
+    const win = this.windows.get(key)
+    if (!win) return
+    win.isMaximized() ? win.unmaximize() : win.maximize()
+  }
+
+  close(key: string) {
+    const win = this.windows.get(key)
+    win?.close()
+  }
+
   closeAll() {
     this.windows.forEach((win) => win.close())
     this.windows.clear()

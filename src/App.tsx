@@ -1,13 +1,15 @@
-import "./App.css"
-import SvgIcon from "./components/SvgIcon"
+import { useEffect } from "react"
+import Layouts from "./layouts"
 
 function App() {
+  useEffect(() => {
+    postMessage({ payload: 'removeLoading' }, '*')
+  }, [])
+
   return (
     <>
       <div>
-        <SvgIcon icon="hugeicons:account-setting-01" width="24" height="24" />
-        <SvgIcon localIcon="logo" width={64} height={64} />
-        <a>测试文件111</a>
+        <Layouts />
       </div>
     </>
   )
