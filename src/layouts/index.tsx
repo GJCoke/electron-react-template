@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Button, Layout } from "antd"
 import Header from "./header/index"
 
 const { Sider, Content } = Layout
@@ -13,7 +13,9 @@ const Layouts: React.FC = () => {
           <Sider width="64px" className="bg-transparent">
             Sider
           </Sider>
-          <Content className="bg-white rounded-tl-xl p-xy">Content</Content>
+          <Content className="rounded-tl-xl p-xy" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
+            <Button type="primary">测试一下</Button>
+          </Content>
         </Layout>
       </Layout>
     </div>

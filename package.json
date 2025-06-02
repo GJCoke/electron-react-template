@@ -50,6 +50,7 @@
     }
   },
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@iconify/react": "^6.0.0",
     "@unocss/preset-wind3": "^66.1.2",
     "antd": "^5.25.3",

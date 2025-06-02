@@ -4,17 +4,16 @@ import "virtual:svg-icons-register"
 import App from "./App.tsx"
 import "uno.css"
 import "./index.css"
-import { ConfigProvider } from "antd"
+import { ThemeProvider } from "./theme/ThemeProvider"
+import { Watermark } from "antd"
+import '@ant-design/v5-patch-for-react-19'
 
-async function test() {
-  const c1 = await window.electronAPI?.ping()
-  console.log(c1)
-}
-test()
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfigProvider theme={{ cssVar: true }}>
-      <App />
-    </ConfigProvider>
+    <ThemeProvider>
+      <Watermark content="Coke">
+        <App />
+      </Watermark>
+    </ThemeProvider>
   </React.StrictMode>
 )
