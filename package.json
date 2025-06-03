@@ -19,7 +19,7 @@
     "prepare": "simple-git-hooks"
   },
   "env": {
-    "host": "127.0.0.1",
+    "host": "0.0.0.0",
     "port": 13333
   },
   "build": {
@@ -27,7 +27,7 @@
     "productName": "electron-react-template",
     "directories": {
       "buildResources": "static/icons",
-      "output": "release/v${version}-${platform}"
+      "output": "dist-release/v${version}-${platform}"
     },
     "files": [
       "dist-electron/**/*",

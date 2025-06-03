@@ -13,6 +13,12 @@
         if (loader) loader.remove()
       }
     })
+    setTimeout(() => {
+      const loader = document.getElementById("app-loading");
+      if (loader) {
+        loader.remove();
+      }
+    }, 3000)
   </script>
   <body>
     <div id="app-loading">

@@ -1,3 +1,6 @@
+
+@import "./reset.css";
+@import "./loading.css";
+
 @import "./tokens/colors.css";
 @import "./tokens/themes/dark.css";
-@import "./reset.css";

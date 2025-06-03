@@ -6,6 +6,7 @@ import UnoCSS from "unocss/vite"
 import { fileURLToPath } from "node:url"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import path from "node:path"
+import pkg from "./package.json"
 
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd())
@@ -53,5 +54,10 @@ export default defineConfig((configEnv) => {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
+    server: {
+      open: false,
+      host: pkg.env.host,
+      port: pkg.env.port,
+    }
   }
 })

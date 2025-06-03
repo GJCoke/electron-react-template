@@ -20,7 +20,7 @@
     "moduleDetection": "force",
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "dist-types",
     "jsx": "react-jsx",
 
     /* Linting */

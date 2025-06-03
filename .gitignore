@@ -29,3 +29,5 @@ yarn.lock
 dist-electron
 release/
 tsconfig.tsbuildinfo
+dist-types/
+dist-release/

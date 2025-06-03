@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Layout } from "antd"
+import { Button, Layout, Watermark } from "antd"
 import Header from "./header/index"
 import Sider from "./sider"
 
@@ -13,7 +13,9 @@ const Layouts: React.FC = () => {
         <Layout className="bg-transparent">
           <Sider className="c-text-surface" />
           <Content className="rounded-tl-xl p-xy bg-background">
-            <Button type="primary">测试一下</Button>
+            <Watermark font={{ fontSize: 12 }} content="Coke" className="h-full w-full">
+              <Button type="primary">测试一下</Button>
+            </Watermark>
           </Content>
         </Layout>
       </Layout>

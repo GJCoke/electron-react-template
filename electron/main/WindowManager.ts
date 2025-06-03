@@ -4,6 +4,7 @@ import { fileURLToPath } from "url"
 import path from "node:path"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+export const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
 
 interface WindowOptions {
   key: string
@@ -29,8 +30,13 @@ export class WindowManager {
       },
     })
 
-    const loadURL = url ?? "http://localhost:5173"
-    win.loadURL(loadURL).then(() => {})
+    if (url) {
+      win.loadURL(url).then()
+    } else if (VITE_DEV_SERVER_URL) {
+      win.loadURL(VITE_DEV_SERVER_URL).then()
+    } else {
+      win.loadFile(join(__dirname, '../../dist/index.html')).then()
+    }
 
     this.windows.set(key, win)
 
