@@ -1,14 +1,13 @@
-import { lazy } from "react";
+import { lazy } from "react"
 import { Navigate, type RouteObject } from "react-router-dom"
-import MainLayout from "@/layouts";
+import MainLayout from "@/layouts"
 
 // 懒加载页面
-const Dashboard = lazy(() => import("@/views/Home"));
-const Settings = lazy(() => import("@/views/NotFound"));
+const Dashboard = lazy(() => import("@/views/Home"))
+const Settings = lazy(() => import("@/views/NotFound"))
 const NotFound = lazy(() => import("@/views/404"))
 const Forbidden = lazy(() => import("@/views/403"))
 const ServerError = lazy(() => import("@/views/500"))
-
 
 export const routes: RouteObject[] = [
   {
@@ -25,5 +24,5 @@ export const routes: RouteObject[] = [
   {
     path: "*",
     element: <NotFound />,
-  }
-];
+  },
+]

@@ -41,7 +41,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         colorPrimary: "#6c63ff",
         colorInfo: "#6c63ff",
         wireframe: false,
-        colorPrimaryBg: "#868a8f80"
+        colorPrimaryBg: "#868a8f80",
       },
     }
   }, [mode])

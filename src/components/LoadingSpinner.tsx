@@ -1,5 +1,5 @@
-import React from "react";
-import "@/styles/loading.css";
+import React from "react"
+import "@/styles/loading.css"
 
 const LoadingSpinner: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const LoadingSpinner: React.FC = () => {
         <div className="sk-cube sk-cube9"></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoadingSpinner;
+export default LoadingSpinner
