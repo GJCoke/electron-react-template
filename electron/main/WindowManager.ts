@@ -35,7 +35,7 @@ export class WindowManager {
     } else if (VITE_DEV_SERVER_URL) {
       win.loadURL(VITE_DEV_SERVER_URL).then()
     } else {
-      win.loadFile(join(__dirname, '../../dist/index.html')).then()
+      win.loadFile(join(__dirname, "../../dist/index.html")).then()
     }
 
     this.windows.set(key, win)

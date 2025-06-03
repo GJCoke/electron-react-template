@@ -58,6 +58,6 @@ export default defineConfig((configEnv) => {
       open: false,
       host: pkg.env.host,
       port: pkg.env.port,
-    }
+    },
   }
 })
