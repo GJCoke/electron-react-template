@@ -55,8 +55,8 @@ export class MainApp {
         minWidth: minWidth,
         minHeight: minHeight,
         frame: false,
-        titleBarStyle: 'hiddenInset',
-        trafficLightPosition: { x: 8, y: 14 }
+        titleBarStyle: "hiddenInset",
+        trafficLightPosition: { x: 8, y: 14 },
       },
     })
   }

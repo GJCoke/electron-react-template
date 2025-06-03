@@ -13,13 +13,12 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ className }) => {
-
   const handelToggleMaximize = () => {
     window.electronAPI?.toggleMaximize()
   }
 
   return (
-    <Layout.Header className={`${className} title-bar h-44px lh-normal c-white flex flex-col justify-center p-x select-none`}>
+    <Layout.Header className={`${className} drag h-44px lh-normal flex flex-col justify-center p-x select-none`}>
       <div className="flex justify-between items-center" onDoubleClick={handelToggleMaximize}>
         <div className="w-100px" />
         <div className="flex gap-4 justify-center items-center w-1/3">

@@ -9,33 +9,58 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && electron-builder --mac --win --linux",
+    "build:win": "tsc -b && vite build && electron-builder --win --x64",
+    "build:mac": "tsc -b && vite build && electron-builder --mac",
+    "build:linux": "tsc -b && vite build && electron-builder --linux",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write .",
     "commit": "sa git-commit",
     "prepare": "simple-git-hooks"
   },
+  "env": {
+    "host": "127.0.0.1",
+    "port": 13333
+  },
   "build": {
     "appId": "com.example.electron",
     "productName": "electron-react-template",
     "directories": {
-      "buildResources": "build"
+      "buildResources": "static/icons",
+      "output": "release/v${version}-${platform}"
     },
     "files": [
       "dist-electron/**/*",
       "dist/**/*",
-      "node_modules/**/*",
-      "package.json"
+      "package.json",
+      "static/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "static/icons/logo.png",
+        "to": "${productName}.png"
+      }
     ],
     "mac": {
       "target": [
         "dmg"
-      ]
+      ],
+      "artifactName": "${productName}-v${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "shortcutName": "${productName}",
+      "uninstallDisplayName": "${productName}",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": true,
+      "allowToChangeInstallationDirectory": true
     },
     "win": {
       "target": [
-        "nsis"
-      ]
+        "nsis", "zip"
+      ],
+      "artifactName": "${productName}-v${version}.${ext}"
     },
     "linux": {
       "target": [
@@ -46,7 +71,8 @@
           ]
         }
       ],
-      "category": "Development"
+      "category": "Development",
+      "artifactName": "${productName}-v${version}.${ext}"
     }
   },
   "dependencies": {

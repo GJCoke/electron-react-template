@@ -1,0 +1,8 @@
+:root[data-theme="dark"] {
+  --color-bg: #000000;
+  --color-text-content: #ffffff;
+  --color-surface-bg:
+    radial-gradient(circle at 20% 30%, #353c48 0%, transparent 60%),
+    radial-gradient(circle at 80% 40%, #222731 0%, transparent 70%),
+    radial-gradient(circle at top left, #353c48 0%, #13151e 100%);
+}

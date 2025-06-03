@@ -1,7 +1,9 @@
 import { ipcMain } from "electron"
 
-type IpcCallback<TArgs extends unknown[] = unknown[], TResult = unknown> =
-  (event: Electron.IpcMainInvokeEvent, ...args: TArgs) => TResult
+type IpcCallback<TArgs extends unknown[] = unknown[], TResult = unknown> = (
+  event: Electron.IpcMainInvokeEvent,
+  ...args: TArgs
+) => TResult
 
 export class IpcHandler {
   register(channel: string, handler: IpcCallback) {

@@ -7,12 +7,12 @@
     <title>electron-react-template</title>
   </head>
   <script>
-    window.addEventListener('message', (event) => {
-      if (event.data.payload === 'removeLoading') {
-        const loader = document.getElementById('app-loading');
-        if (loader) loader.remove();
+    window.addEventListener("message", (event) => {
+      if (event.data.payload === "removeLoading") {
+        const loader = document.getElementById("app-loading")
+        if (loader) loader.remove()
       }
-    });
+    })
   </script>
   <body>
     <div id="app-loading">

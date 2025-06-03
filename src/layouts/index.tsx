@@ -1,19 +1,18 @@
-import React from 'react';
+import React from "react"
 import { Button, Layout } from "antd"
 import Header from "./header/index"
+import Sider from "./sider"
 
-const { Sider, Content } = Layout
+const { Content } = Layout
 
 const Layouts: React.FC = () => {
   return (
-    <div className="gradient w-screen h-screen">
+    <div className="surface">
       <Layout className="w-screen h-screen bg-transparent">
-        <Header className="bg-transparent" />
+        <Header className="bg-transparent c-text-surface" />
         <Layout className="bg-transparent">
-          <Sider width="64px" className="bg-transparent">
-            Sider
-          </Sider>
-          <Content className="rounded-tl-xl p-xy" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
+          <Sider className="c-text-surface" />
+          <Content className="rounded-tl-xl p-xy bg-background">
             <Button type="primary">测试一下</Button>
           </Content>
         </Layout>

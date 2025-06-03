@@ -21,13 +21,13 @@ export const useTheme = () => {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mode, setMode] = useState<ThemeMode>("light")
 
+  const setTheme = (theme: string) => {
+    document.documentElement.setAttribute("data-theme", theme)
+  }
+
   useEffect(() => {
-    const root = document.documentElement
-    if (mode === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
+    const current = document.documentElement.getAttribute("data-theme")
+    setTheme(current === "dark" ? "light" : "dark")
   }, [mode])
 
   const toggleTheme = () => setMode((prev) => (prev === "light" ? "dark" : "light"))

@@ -7,5 +7,19 @@ export default defineConfig({
     presetAttributify(), // 支持属性模式
     presetIcons(), // 图标支持
   ],
-  shortcuts: [["btn", "px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"]],
+  shortcuts: [
+    ["btn", "px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"],
+    ["surface", "[background:var(--color-surface-bg)]"],
+    ["drag", "[-webkit-app-region:drag]"],
+    ["not-drag", "[-webkit-app-region:no-drag]"],
+  ],
+  theme: {
+    colors: {
+      // primary: "var(--primary-color)",
+      background: "var(--color-bg)",
+      text: "var(--color-text-content",
+      surface: "var(--color-surface-bg)",
+      textSurface: "var(--color-text-primary)",
+    },
+  },
 })

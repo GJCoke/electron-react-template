@@ -14,76 +14,81 @@ const Avatar = () => {
     borderRadius: token.borderRadiusLG,
     boxShadow: token.boxShadowSecondary,
     marginTop: 8,
-    width: "225px"
+    width: "225px",
   }
 
-  const items: MenuProps['items'] = [
+  const items: MenuProps["items"] = [
     {
-      key: '5',
+      key: "5",
       label: "切换主题",
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: '1',
+      key: "1",
       label: "帮助与客服",
     },
     {
-      key: '2',
+      key: "2",
       label: "设置",
     },
     {
-      key: '3',
-      label: '退出登录',
+      key: "3",
+      label: "退出登录",
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: '4',
+      key: "4",
       label: (
-        <a target="_blank" href="https://github.com/GJCoke/electron-react-template" className="flex justify-between items-center">
+        <a
+          target="_blank"
+          href="https://github.com/GJCoke/electron-react-template"
+          className="flex justify-between items-center"
+        >
           <span>源码仓库</span>
           <SvgIcon icon="radix-icons:github-logo" />
         </a>
-      )
+      ),
     },
   ]
 
-  const handelMenuClick: MenuProps['onClick'] = ({ key }) => {
-    if (key === '5') {
+  const handelMenuClick: MenuProps["onClick"] = ({ key }) => {
+    if (key === "5") {
       toggleTheme()
     }
   }
 
   return (
-    <div
-      className="not-drag cursor-pointer"
-      onDoubleClick={(e) => e.stopPropagation()}
-    >
+    <div className="not-drag cursor-pointer" onDoubleClick={(e) => e.stopPropagation()}>
       <Dropdown
         menu={{ items, onClick: handelMenuClick }}
-        trigger={['click']}
+        trigger={["click"]}
         popupRender={(menu) => (
           <div style={contentStyle}>
             <div className="p-2">
               <div className="flex items-center gap-2">
-                <AntdAvatar size={42} className="bg-green">Coke</AntdAvatar>
+                <AntdAvatar size={42} className="bg-green">
+                  Coke
+                </AntdAvatar>
                 <div>Coke</div>
               </div>
             </div>
             {React.cloneElement(
               menu as React.ReactElement<{
-                style: React.CSSProperties;
+                style: React.CSSProperties
               }>,
-              { style: {boxShadow: 'none'} },
+              { style: { boxShadow: "none" } }
             )}
           </div>
         )}
       >
         <a onClick={(e) => e.preventDefault()}>
-          <AntdAvatar size={28} className="bg-green">Coke</AntdAvatar>
+          <AntdAvatar size={28} className="bg-green">
+            Coke
+          </AntdAvatar>
         </a>
       </Dropdown>
     </div>

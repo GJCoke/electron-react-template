@@ -3,7 +3,7 @@ import Layouts from "./layouts"
 
 function App() {
   useEffect(() => {
-    postMessage({ payload: 'removeLoading' }, '*')
+    postMessage({ payload: "removeLoading" }, "*")
   }, [])
 
   return (

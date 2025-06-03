@@ -2,7 +2,6 @@ import React from "react"
 import IconButton from "./IconButton"
 
 const Update: React.FC = () => {
-
   const handelClickButton = () => {
     console.log("handelClickButton")
   }

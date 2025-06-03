@@ -1,0 +1,13 @@
+:root {
+  --color-bg: #ffffff;
+  --color-text-content: #000000;
+  --color-text-primary: #d3d3d3;
+  --color-surface-bg: radial-gradient(
+    circle at top left,
+    #394c6c 0%,
+    #3b4c6d 10%,
+    #2f3a56 20%,
+    #252f4a 30%,
+    #27324e 100%
+  );
+}
