@@ -38,6 +38,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       cssVar: true, // 启用 css 变量
       token: {
         borderRadius: 6,
+        colorPrimary: "#6c63ff",
+        colorInfo: "#6c63ff",
+        wireframe: false,
+        colorPrimaryBg: "#868a8f80"
       },
     }
   }, [mode])

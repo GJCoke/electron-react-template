@@ -20,7 +20,7 @@ export default defineConfig((configEnv) => {
       }),
       electron([
         {
-          entry: "electron/main/index.ts",
+          entry: "electron/main/index.tsx",
           vite: {
             build: {
               outDir: "dist-electron/main",
@@ -33,7 +33,7 @@ export default defineConfig((configEnv) => {
           },
         },
         {
-          entry: "electron/preload/index.ts",
+          entry: "electron/preload/index.tsx",
           vite: {
             build: {
               outDir: "dist-electron/preload",

@@ -1,5 +1,10 @@
 import { useEffect } from "react"
-import Layouts from "./layouts"
+import { BrowserRouter, useRoutes } from "react-router-dom"
+import { routes } from "@/router"
+
+const AppRoutes = () => {
+  return useRoutes(routes);  // 这里不要用 Suspense 包裹
+}
 
 function App() {
   useEffect(() => {
@@ -8,9 +13,9 @@ function App() {
 
   return (
     <>
-      <div>
-        <Layouts />
-      </div>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </>
   )
 }
