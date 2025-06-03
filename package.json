@@ -58,7 +58,8 @@
     },
     "win": {
       "target": [
-        "nsis", "zip"
+        "nsis",
+        "zip"
       ],
       "artifactName": "${productName}-v${version}.${ext}"
     },
