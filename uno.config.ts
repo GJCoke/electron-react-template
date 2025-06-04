@@ -3,7 +3,9 @@ import presetWind3 from "@unocss/preset-wind3"
 
 export default defineConfig({
   presets: [
-    presetWind3(), // 基础原子类
+    presetWind3({
+      dark: "class"
+    }), // 基础原子类
     presetAttributify(), // 支持属性模式
     presetIcons(), // 图标支持
   ],
@@ -20,6 +22,17 @@ export default defineConfig({
       text: "var(--color-text-content",
       surface: "var(--color-surface-bg)",
       textSurface: "var(--color-text-primary)",
+      primary: "var(--color-primary)",
+      primaryActive: "var(--color-primary-active)",
+      primaryHover: "var(--color-primary-hover)",
+      title: 'var(--color-text-title)',
+      subtitle: 'var(--color-text-subtitle)',
+      body: 'var(--color-text-body)',
+      muted: 'var(--color-text-muted)',
+      link: 'var(--color-text-link)',
+      linkHover: 'var(--color-text-link-hover)',
+      error: 'var(--color-text-error)',
+      hover: 'var(--color-hover)',
     },
   },
 })

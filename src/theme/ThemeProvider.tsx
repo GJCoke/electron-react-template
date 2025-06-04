@@ -1,4 +1,3 @@
-// src/theme/ThemeProvider.tsx
 import { ConfigProvider, theme as antdTheme, type ThemeConfig } from "antd"
 import React, { createContext, useContext, useState, useMemo, useEffect } from "react"
 
@@ -9,7 +8,7 @@ interface ThemeContextType {
   toggleTheme: () => void
   themeConfig: ThemeConfig
 }
-
+const THEME_STORAGE_KEY = "theme-mode"
 const ThemeContext = createContext<ThemeContextType | null>(null)
 
 export const useTheme = () => {
@@ -19,15 +18,27 @@ export const useTheme = () => {
 }
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mode, setMode] = useState<ThemeMode>("light")
 
-  const setTheme = (theme: string) => {
-    document.documentElement.setAttribute("data-theme", theme)
+  const getInitialTheme = (): ThemeMode => {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null
+    if (stored === "light" || stored === "dark") {
+      return stored
+    }
+
+    // 没有存储记录：自动判断系统主题
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    return systemDark ? "dark" : "light"
   }
 
+  const [mode, setMode] = useState<ThemeMode>(() => {
+    const theme = getInitialTheme()
+    document.documentElement.setAttribute("data-theme", theme)
+    return theme
+  })
+
   useEffect(() => {
-    const current = document.documentElement.getAttribute("data-theme")
-    setTheme(current === "dark" ? "light" : "dark")
+    document.documentElement.setAttribute("data-theme", mode)
+    localStorage.setItem(THEME_STORAGE_KEY, mode)
   }, [mode])
 
   const toggleTheme = () => setMode((prev) => (prev === "light" ? "dark" : "light"))
@@ -42,6 +53,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         colorInfo: "#6c63ff",
         wireframe: false,
         colorPrimaryBg: "#868a8f80",
+        colorSuccess: "#00c9a7"
       },
     }
   }, [mode])

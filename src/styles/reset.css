@@ -10,15 +10,19 @@
 
 body {
   margin: 0;
-  line-height: inherit;
+  line-height: normal;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-text-link);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--color-text-link-hover);
+}
+
+.custom-popover .ant-popover-inner {
+  padding: 4px;
 }

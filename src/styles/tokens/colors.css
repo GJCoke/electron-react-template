@@ -1,4 +1,8 @@
 :root {
+  --color-primary: #6c63ff;
+  --color-hover: rgba(0, 0, 0, 0.2);
+  --color-primary-active: #00c9a7;
+  --color-primary-hover: #c4fcef;
   --color-bg: #ffffff;
   --color-text-content: #000000;
   --color-text-primary: #d3d3d3;
@@ -10,4 +14,13 @@
     #252f4a 30%,
     #27324e 100%
   );
+
+  /** text */
+  --color-text-title: #1f2937;
+  --color-text-subtitle: #4b5563;
+  --color-text-body: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-text-link: #646cff;
+  --color-text-link-hover: #535bf2;
+  --color-text-error: #ff4d4f;
 }

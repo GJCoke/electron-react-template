@@ -1,23 +1,29 @@
 import React, { type CSSProperties } from "react"
 import SvgIcon from "@/components/SvgIcon"
+import { useNavigate } from "react-router-dom"
 
 interface MenuItemProps {
   className?: string
   style?: CSSProperties
   title: string
   icon: string
+  to?: string
+  isActive?: boolean
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon, to, isActive }) => {
+  const navigation = useNavigate()
+
   return (
     <div
-      className={`${className} h-54px w-54px rounded-lg flex flex-col items-center justify-center hover:bg-black/30 cursor-pointer`}
+      className={`${className} rounded-lg flex flex-col items-center justify-center hover:bg-hover hover:c-primary-active cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
       style={style}
+      onClick={() => {to && navigation(to)}}
     >
       <div>
         <SvgIcon className="text-22px" icon={icon} />
       </div>
-      <div className="text-10px font-bold">{title}</div>
+      <div className="text-10px font-black">{title}</div>
     </div>
   )
 }

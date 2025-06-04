@@ -1,8 +1,19 @@
 :root[data-theme="dark"] {
+  --color-primary: #5a54e0;
+  --color-hover: rgba(255, 255, 255, 0.2);
   --color-bg: #000000;
   --color-text-content: #ffffff;
   --color-surface-bg:
     radial-gradient(circle at 20% 30%, #353c48 0%, transparent 60%),
     radial-gradient(circle at 80% 40%, #222731 0%, transparent 70%),
     radial-gradient(circle at top left, #353c48 0%, #13151e 100%);
+
+  /** text */
+  --color-text-title: #f9fafb;
+  --color-text-subtitle: #d1d5db;
+  --color-text-body: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-text-link: #646cff;
+  --color-text-link-hover: #535bf2;
+  --color-text-error: #ff4d4f;
 }
