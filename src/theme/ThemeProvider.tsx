@@ -18,7 +18,6 @@ export const useTheme = () => {
 }
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-
   const getInitialTheme = (): ThemeMode => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null
     if (stored === "light" || stored === "dark") {
@@ -53,7 +52,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         colorInfo: "#6c63ff",
         wireframe: false,
         colorPrimaryBg: "#868a8f80",
-        colorSuccess: "#00c9a7"
+        colorSuccess: "#00c9a7",
       },
     }
   }, [mode])

@@ -17,8 +17,8 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const navigation = useNavigate()
   const [maxVisibleItems, setMaxVisibleItems] = useState(0)
-  const sidebarRoutes = (routes[0].children || []).filter(r => !r.handle?.hidden && !r.index)
-  const [open, setOpen] = useState(false);
+  const sidebarRoutes = (routes[0].children || []).filter((r) => !r.handle?.hidden && !r.index)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const el = containerRef.current
@@ -48,14 +48,10 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
     return to.startsWith("/") ? to : `/${to}`
   }
 
-  const activeVisibleIndex = visibleItems.findIndex(item =>
-    location.pathname === normalizeTo(item.path)
-  )
+  const activeVisibleIndex = visibleItems.findIndex((item) => location.pathname === normalizeTo(item.path))
 
   // 判断 overflowItems 中是否有激活的
-  const isMoreActive = overflowItems.some(item =>
-    location.pathname === normalizeTo(item.path)
-  )
+  const isMoreActive = overflowItems.some((item) => location.pathname === normalizeTo(item.path))
 
   return (
     <Layout.Sider width="64px" className={`${className} bg-transparent`} style={style} ref={containerRef}>
@@ -80,21 +76,22 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
             trigger="click"
             content={
               <div className="flex flex-col gap-1">
-                {
-                  overflowItems.map((item, i) => {
-                    const isActive = location.pathname === normalizeTo(item.path)
-                    return (
-                      <div
-                        key={i}
-                        className={`flex items-center w-140px p-3 gap-3 hover:bg-hover rounded-lg cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
-                        onClick={() => {navigation(item.path || "/"); setOpen(false)}}
-                      >
-                        <SvgIcon icon={item.handle.icon} className="text-22px" />
-                        { item.handle.title }
-                      </div>
-                    )
-                  })
-                }
+                {overflowItems.map((item, i) => {
+                  const isActive = location.pathname === normalizeTo(item.path)
+                  return (
+                    <div
+                      key={i}
+                      className={`flex items-center w-140px p-3 gap-3 hover:bg-hover rounded-lg cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
+                      onClick={() => {
+                        navigation(item.path || "/")
+                        setOpen(false)
+                      }}
+                    >
+                      <SvgIcon icon={item.handle.icon} className="text-22px" />
+                      {item.handle.title}
+                    </div>
+                  )
+                })}
               </div>
             }
             open={open}

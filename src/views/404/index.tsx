@@ -9,7 +9,7 @@ interface Props {
 }
 
 const NotFound: React.FC<Props> = ({ className, style }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div className={`h-full w-full flex items-center justify-center bg-background ${className}`} style={style}>
@@ -19,7 +19,14 @@ const NotFound: React.FC<Props> = ({ className, style }) => {
           <p className="text-2xl md:text-3xl mb-8 c-title">糟了，你撞到了前端宇宙的边界！</p>
           <p className="text-lg md:text-xl c-subtitle">你正在寻找的页面已经被传送到异次元，或者压根就不存在。</p>
           <p className="text-lg md:text-xl c-subtitle">也许是时空坐标错了？</p>
-          <Button type="primary" onClick={() => {navigate("/")}}>回到导航大厅</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/")
+            }}
+          >
+            回到导航大厅
+          </Button>
         </div>
         <div className="w-full lg:flex lg:justify-end lg:w-1/2">
           <SvgIcon localIcon="404" className="text-400px xl:text-600px" />

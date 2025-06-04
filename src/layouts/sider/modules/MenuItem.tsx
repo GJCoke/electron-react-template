@@ -18,7 +18,9 @@ const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon, to, 
     <div
       className={`${className} rounded-lg flex flex-col items-center justify-center hover:bg-hover hover:c-primary-active cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
       style={style}
-      onClick={() => {to && navigation(to)}}
+      onClick={() => {
+        to && navigation(to)
+      }}
     >
       <div>
         <SvgIcon className="text-22px" icon={icon} />

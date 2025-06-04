@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Forbidden: React.FC<Props> = ({ className, style }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div className={`h-full w-full flex items-center justify-center bg-background ${className}`} style={style}>
@@ -19,7 +19,14 @@ const Forbidden: React.FC<Props> = ({ className, style }) => {
           <p className="text-2xl md:text-3xl mb-8 c-title">糟了，这片区域被权限力场封锁了！</p>
           <p className="text-lg md:text-xl c-subtitle">你试图进入一个你还没有权限访问的前端禁区。</p>
           <p className="text-lg md:text-xl c-subtitle">再等等，或者找个宇宙管理员开个权限口子？</p>
-          <Button type="primary" onClick={() => {navigate("/")}}>回到安全宇宙</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/")
+            }}
+          >
+            回到安全宇宙
+          </Button>
         </div>
         <div className="w-full lg:flex lg:justify-end lg:w-1/2">
           <SvgIcon localIcon="403" className="text-400px xl:text-600px" />

@@ -17,37 +17,37 @@ export const routes: RouteObject[] = [
       {
         path: "message",
         element: <Forbidden />,
-        handle: { "title": "消息", icon: "hugeicons:message-notification-01" },
+        handle: { title: "消息", icon: "hugeicons:message-notification-01" },
       },
       {
         path: "video",
         element: <NotFound />,
-        handle: { "title": "视频", icon: "hugeicons:video-01" }
+        handle: { title: "视频", icon: "hugeicons:video-01" },
       },
       {
         path: "date",
         element: <ServerError />,
-        handle: { "title": "日历", icon: "hugeicons:calendar-02" }
+        handle: { title: "日历", icon: "hugeicons:calendar-02" },
       },
       {
         path: "message1",
         element: <Dashboard />,
-        handle: { "title": "首页", icon: "hugeicons:home-03" },
+        handle: { title: "首页", icon: "hugeicons:home-03" },
       },
       {
         path: "*",
         element: <NotFound />,
-        handle: { "title": "404", hidden: true }
+        handle: { title: "404", hidden: true },
       },
       {
         path: "403",
         element: <Forbidden />,
-        handle: { "title": "403", hidden: true }
+        handle: { title: "403", hidden: true },
       },
       {
         path: "500",
         element: <ServerError />,
-        handle: { "title": "500", hidden: true }
+        handle: { title: "500", hidden: true },
       },
     ],
   },
