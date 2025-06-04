@@ -55,11 +55,12 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
 
   return (
     <Layout.Sider width="64px" className={`${className} bg-transparent`} style={style} ref={containerRef}>
-      <div className={`flex flex-col gap-${MENU_ITEM_GAP}px justify-center items-center`}>
+      <div className="flex flex-col justify-center items-center" style={{ gap: MENU_ITEM_GAP }}>
         {visibleItems.map(({ handle: { title, icon }, path }, i) => {
           return (
             <MenuItem
-              className={`h-${MENU_ITEM_HEIGHT}px w-56px`}
+              className="w-56px"
+              style={{ height: MENU_ITEM_HEIGHT }}
               title={title}
               icon={icon}
               key={i}
@@ -99,7 +100,8 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
           >
             <div className="h-56px w-56px flex items-center justify-center cursor-pointer hover:bg-black/20 rounded-lg">
               <MenuItem
-                className={`h-${MENU_ITEM_HEIGHT}px w-56px`}
+                className="w-56px"
+                style={{ height: MENU_ITEM_HEIGHT }}
                 title="更多"
                 icon="hugeicons:more-horizontal-square-01"
                 key="more"
