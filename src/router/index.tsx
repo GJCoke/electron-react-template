@@ -4,9 +4,9 @@ import MainLayout from "@/layouts"
 
 // 懒加载页面
 const Dashboard = lazy(() => import("@/views/Home"))
-const NotFound = lazy(() => import("@/views/404"))
-const Forbidden = lazy(() => import("@/views/403"))
-const ServerError = lazy(() => import("@/views/500"))
+const NotFound = lazy(() => import("@/views/error/404"))
+const Forbidden = lazy(() => import("@/views/error/403"))
+const ServerError = lazy(() => import("@/views/error/500"))
 
 export const routes: RouteObject[] = [
   {

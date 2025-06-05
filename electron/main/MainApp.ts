@@ -2,6 +2,8 @@
 import { app, screen } from "electron"
 import { IpcHandler } from "./IpcHandler"
 import { WindowManager } from "./WindowManager"
+import log from "electron-log"
+
 
 export class MainApp {
   private ipcHandler: IpcHandler
@@ -10,7 +12,8 @@ export class MainApp {
   constructor() {
     this.ipcHandler = new IpcHandler()
     this.windowManager = new WindowManager()
-
+    log.transports.file.level = 'info'
+    log.transports.console.level = 'debug'
     this.registerEvents()
     this.registerIpc()
     this.registerOn()
@@ -46,7 +49,7 @@ export class MainApp {
     const windowHeight = Math.floor(height * 0.8)
     const minWidth = Math.floor(width * 0.6)
     const minHeight = Math.floor(height * 0.6)
-
+    log.info("Minimizing window width", minWidth, minHeight, minHeight)
     this.windowManager.createWindow({
       key: "main",
       options: {
