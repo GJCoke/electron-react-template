@@ -4,7 +4,6 @@ import { IpcHandler } from "./IpcHandler"
 import { WindowManager } from "./WindowManager"
 import log from "electron-log"
 
-
 export class MainApp {
   private ipcHandler: IpcHandler
   private windowManager: WindowManager
@@ -12,8 +11,8 @@ export class MainApp {
   constructor() {
     this.ipcHandler = new IpcHandler()
     this.windowManager = new WindowManager()
-    log.transports.file.level = 'info'
-    log.transports.console.level = 'debug'
+    log.transports.file.level = "info"
+    log.transports.console.level = "debug"
     this.registerEvents()
     this.registerIpc()
     this.registerOn()
