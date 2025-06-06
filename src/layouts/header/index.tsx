@@ -14,7 +14,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({ className }) => {
   const handelToggleMaximize = () => {
-    window.electronAPI?.toggleMaximize()
+    window.electronWindow?.toggleMaximize()
   }
 
   return (

@@ -1,9 +1,8 @@
-import { contextBridge, ipcRenderer } from "electron"
+import { contextBridge } from "electron"
+import { ipcBridge } from "./bridge/ipc"
+import { windowBridge } from "./bridge/window"
+import { loggerBridge } from "./bridge/logger"
 
-contextBridge.exposeInMainWorld("electronAPI", {
-  ping: (): Promise<string> => ipcRenderer.invoke("ping"),
-  minimize: () => ipcRenderer.send("window:minimize"),
-  maximize: () => ipcRenderer.send("window:maximize"),
-  toggleMaximize: () => ipcRenderer.send("window:toggleMaximize"),
-  close: () => ipcRenderer.send("window:close"),
-})
+contextBridge.exposeInMainWorld("electronAPI", ipcBridge)
+contextBridge.exposeInMainWorld("electronWindow", windowBridge)
+contextBridge.exposeInMainWorld("electronLogger", loggerBridge)

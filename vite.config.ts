@@ -27,7 +27,7 @@ export default defineConfig(({ command, mode }) => {
       electron({
         main: {
           // Shortcut of `build.lib.entry`
-          entry: "electron/main/index.ts",
+          entry: "electron/index.ts",
           onstart(args) {
             if (process.env.VSCODE_DEBUG) {
               console.log(/* For `.vscode/.debug.script.mjs` */ "[startup] Electron App")
@@ -39,7 +39,7 @@ export default defineConfig(({ command, mode }) => {
             build: {
               sourcemap,
               minify: isBuild,
-              outDir: "dist-electron/main",
+              outDir: "dist-electron",
               rollupOptions: {
                 external: Object.keys("dependencies" in pkg ? pkg.dependencies : {}),
               },

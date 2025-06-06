@@ -1,0 +1,7 @@
+<svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- 白色背景圆形 -->
+    <circle cx="100" cy="100" r="90" fill="#ffffff" />
+
+    <!-- 黑色闪电图形 -->
+    <path d="M100 40L70 100H90L60 160L140 100H110L130 60Z" fill="#000000" />
+</svg>
