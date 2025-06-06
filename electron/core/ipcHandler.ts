@@ -1,5 +1,5 @@
 import { ipcMain } from "electron"
-import { Logger } from "../utils/Logger"
+import { Logger } from "../utils/logger"
 
 const logger = new Logger("IPCHandler")
 

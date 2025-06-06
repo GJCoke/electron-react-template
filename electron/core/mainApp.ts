@@ -1,7 +1,7 @@
 import { app, BrowserWindow, screen } from "electron"
 import { IpcHandler } from "./ipcHandler"
 import { WindowManager } from "../manager/windowManager"
-import { Logger } from "../utils/Logger"
+import { Logger } from "../utils/logger"
 import { TrayManager } from "../manager/trayManager"
 import { MenuManager } from "../manager/menuManager"
 
