@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import IconButton from "./IconButton"
 import { Button, Modal, Popover } from "antd"
 
@@ -12,6 +12,7 @@ const Update: React.FC = () => {
   const [open, setOpen] = useState(false)
   const timeout = 5000
   const [openModal, setOpenModal] = useState(false)
+  const timerRef = useRef<number | null>(null)
 
   const hidePopover = () => {
     setOpen(false)
@@ -36,7 +37,7 @@ const Update: React.FC = () => {
       setText(info.info.replace(/\\n/g, "\n"))
 
       showPopover()
-      setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         hidePopover()
       }, timeout)
     })
@@ -52,19 +53,26 @@ const Update: React.FC = () => {
     })
 
     window.electronUpdater?.onDownloaded((info) => {
-      console.log("下载完成", info)
       setDownloaded(true)
       setTitle("更新已准备就绪。点击“重启”即可升级到最新版。")
       setText(info.info.replace(/\\n/g, "\n"))
 
-      info.force ? showModal() : showPopover()
+      if (info.force) {
+        hidePopover()
+        showModal()
+      } else {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current)
+          timerRef.current = null
+        }
+        showPopover()
+      }
     })
 
     window.electronUpdater?.updateReady()
   }, [])
 
   const handelClickButton = () => {
-    console.log("handelClickButton")
     window.electronUpdater?.installUpdate().then()
   }
 
