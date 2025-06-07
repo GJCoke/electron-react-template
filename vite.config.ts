@@ -8,7 +8,7 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import path from "node:path"
 import pkg from "./package.json"
 import { rmSync } from "node:fs"
-import visualizer from 'rollup-plugin-visualizer'
+import visualizer from "rollup-plugin-visualizer"
 
 export default defineConfig(({ command, mode }) => {
   rmSync("dist-electron", { recursive: true, force: true })
@@ -79,7 +79,7 @@ export default defineConfig(({ command, mode }) => {
       port: pkg.env.port,
     },
     build: {
-      chunkSizeWarningLimit: 1000
-    }
+      chunkSizeWarningLimit: 1000,
+    },
   }
 })
