@@ -8,6 +8,7 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import path from "node:path"
 import pkg from "./package.json"
 import { rmSync } from "node:fs"
+import visualizer from 'rollup-plugin-visualizer'
 
 export default defineConfig(({ command, mode }) => {
   rmSync("dist-electron", { recursive: true, force: true })
@@ -18,6 +19,7 @@ export default defineConfig(({ command, mode }) => {
   const sourcemap = isServe || !!process.env.VSCODE_DEBUG
   return {
     plugins: [
+      visualizer({ open: false }), // check package chunk size set true run vite build.
       UnoCSS(),
       react(),
       createSvgIconsPlugin({
@@ -76,5 +78,8 @@ export default defineConfig(({ command, mode }) => {
       host: pkg.env.host,
       port: pkg.env.port,
     },
+    build: {
+      chunkSizeWarningLimit: 1000
+    }
   }
 })

@@ -31,3 +31,4 @@ release/
 tsconfig.tsbuildinfo
 dist-types/
 dist-release/
+stats.html
