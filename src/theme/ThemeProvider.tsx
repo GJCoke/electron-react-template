@@ -1,30 +1,14 @@
-import { ConfigProvider, theme as antdTheme, type ThemeConfig } from "antd"
-import React, { createContext, useContext, useState, useMemo, useEffect } from "react"
+import React, { useState, useMemo, useEffect } from "react"
+import { ConfigProvider, theme as antdTheme } from "antd"
+import { ThemeContext, type ThemeMode, type ThemeContextType } from "@/hooks/useTheme"
 
-type ThemeMode = "light" | "dark"
-
-interface ThemeContextType {
-  mode: ThemeMode
-  toggleTheme: () => void
-  themeConfig: ThemeConfig
-}
 const THEME_STORAGE_KEY = "theme-mode"
-const ThemeContext = createContext<ThemeContextType | null>(null)
-
-export const useTheme = () => {
-  const ctx = useContext(ThemeContext)
-  if (!ctx) throw new Error("useTheme must be used within ThemeProvider")
-  return ctx
-}
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const getInitialTheme = (): ThemeMode => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null
-    if (stored === "light" || stored === "dark") {
-      return stored
-    }
+    if (stored === "light" || stored === "dark") return stored
 
-    // 没有存储记录：自动判断系统主题
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     return systemDark ? "dark" : "light"
   }
@@ -42,10 +26,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const toggleTheme = () => setMode((prev) => (prev === "light" ? "dark" : "light"))
 
-  const themeConfig: ThemeConfig = useMemo(() => {
+  const themeConfig: ThemeContextType["themeConfig"] = useMemo(() => {
     return {
       algorithm: mode === "dark" ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
-      cssVar: true, // 启用 css 变量
+      cssVar: true,
       token: {
         borderRadius: 6,
         colorPrimary: "#6c63ff",
@@ -53,6 +37,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         wireframe: false,
         colorPrimaryBg: "#868a8f80",
         colorSuccess: "#00c9a7",
+      },
+      components: {
+        Button: {
+          algorithm: true,
+        },
       },
     }
   }, [mode])

@@ -1,19 +1,37 @@
 import { BrowserWindow } from "electron"
-import { join } from "path"
-import { fileURLToPath } from "url"
-import path from "node:path"
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-export const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
-
-interface WindowOptions {
-  key: string
-  options: Electron.BrowserWindowConstructorOptions
-  url?: string
-}
+import { IpcHandler } from "../core/ipcHandler.ts"
+import { indexHtml, preloadPath, VITE_DEV_SERVER_URL } from "../utils/constants.ts"
 
 export class WindowManager {
   private windows = new Map<string, BrowserWindow>()
+  private handler: IpcHandler
+
+  constructor(handler: IpcHandler) {
+    this.handler = handler
+    this.registerEvents()
+  }
+
+  private registerEvents() {
+    this.handler.on("window:maximize", (event) => {
+      const win = BrowserWindow.fromWebContents(event.sender)
+      if (win && !win.isMaximized()) {
+        win.maximize()
+      }
+    })
+
+    this.handler.on("window:minimize", (event) => {
+      const win = BrowserWindow.fromWebContents(event.sender)
+      if (win && !win.isMinimized()) {
+        win.minimize()
+      }
+    })
+
+    this.handler.on("window:toggleMaximize", (event) => {
+      const win = BrowserWindow.fromWebContents(event.sender)
+      if (!win) return
+      win.isMaximized() ? win.unmaximize() : win.maximize()
+    })
+  }
 
   createWindow({ key, options, url }: WindowOptions): BrowserWindow {
     if (this.windows.has(key)) {
@@ -23,7 +41,7 @@ export class WindowManager {
     const win = new BrowserWindow({
       ...options,
       webPreferences: {
-        preload: join(__dirname, "./preload/index.js"),
+        preload: preloadPath,
         contextIsolation: true,
         nodeIntegration: false,
         ...options.webPreferences,
@@ -34,7 +52,7 @@ export class WindowManager {
     } else if (VITE_DEV_SERVER_URL) {
       win.loadURL(VITE_DEV_SERVER_URL).then()
     } else {
-      win.loadFile(join(__dirname, "../dist/index.html")).then()
+      win.loadFile(indexHtml).then()
     }
 
     this.windows.set(key, win)
@@ -50,20 +68,6 @@ export class WindowManager {
     return this.windows.get(key)
   }
 
-  minimize(key: string) {
-    const win = this.windows.get(key)
-    if (win && !win.isMinimized()) {
-      win.minimize()
-    }
-  }
-
-  maximize(key: string) {
-    const win = this.windows.get(key)
-    if (win && !win.isMaximized()) {
-      win.maximize()
-    }
-  }
-
   restore(key: string) {
     const win = this.windows.get(key)
     if (win && win.isMinimized()) {
@@ -71,12 +75,6 @@ export class WindowManager {
     } else if (win?.isMaximized()) {
       win.unmaximize()
     }
-  }
-
-  toggleMaximize(key: string) {
-    const win = this.windows.get(key)
-    if (!win) return
-    win.isMaximized() ? win.unmaximize() : win.maximize()
   }
 
   close(key: string) {

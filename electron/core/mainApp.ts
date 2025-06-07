@@ -1,21 +1,21 @@
-import { app, BrowserWindow, screen } from "electron"
+import { app, BrowserWindow, screen, shell } from "electron"
 import { IpcHandler } from "./ipcHandler"
 import { WindowManager } from "../manager/windowManager"
 import { Logger } from "../utils/logger"
 import { TrayManager } from "../manager/trayManager"
 import { MenuManager } from "../manager/menuManager"
+import { AppUpdater } from "../updater/autoUpdater"
 
 const logger = new Logger("MainProcess")
 
 export class MainApp {
   private ipcHandler = new IpcHandler()
-  private windowManager = new WindowManager()
+  private windowManager = new WindowManager(this.ipcHandler)
   private trayManager = new TrayManager()
   private menuManager = new MenuManager()
   private renderLogger = new Logger("RenderProcess")
 
   constructor() {
-    logger.debug("Logger file path:", logger.getFilePath())
     this.registerAppEvents()
     this.registerIpcHandlers()
     this.registerIpcListeners()
@@ -39,9 +39,6 @@ export class MainApp {
   }
 
   private registerIpcListeners() {
-    this.ipcHandler.on("window:maximize", () => this.windowManager.maximize("main"))
-    this.ipcHandler.on("window:minimize", () => this.windowManager.minimize("main"))
-    this.ipcHandler.on("window:toggleMaximize", () => this.windowManager.toggleMaximize("main"))
     this.ipcHandler.on("log", (_, level: LogLevel, message: string, ...args) =>
       this.renderLogger[level](message, ...args)
     )
@@ -49,8 +46,7 @@ export class MainApp {
 
   private createMainWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
-
-    this.windowManager.createWindow({
+    const mainWindow = this.windowManager.createWindow({
       key: "main",
       options: {
         width: Math.floor(width * 0.8),
@@ -62,6 +58,7 @@ export class MainApp {
         trafficLightPosition: { x: 8, y: 14 },
       },
     })
+    new AppUpdater(mainWindow, this.ipcHandler, this.windowManager)
   }
 
   private setupTray() {
@@ -101,11 +98,22 @@ export class MainApp {
           label: "视图",
           submenu: [
             { role: "reload", label: "刷新" },
-            { role: "toggleDevTools", label: "切换开发者工具" },
             { type: "separator" },
             { role: "togglefullscreen", label: "全屏切换" },
           ],
         },
+        {
+          label: "工具",
+          submenu: [
+            {
+              label: "打开日志文件",
+              click: () => shell.openPath(logger.getFilePath()),
+              accelerator: "CommandOrControl+Alt+L"
+            },
+            { type: "separator" },
+            { role: "toggleDevTools", label: "切换开发者工具" },
+          ]
+        }
       ],
     })
   }

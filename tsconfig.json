@@ -5,7 +5,7 @@
     "noEmit": true
   },
   "files": [],
-  "include": ["src", "electron", "src/typings"],
+  "include": ["src/typings", "electron/typings"],
   "exclude": ["dist", "node_modules"],
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,5 @@
 import { Avatar as AntdAvatar, Dropdown, type MenuProps, theme } from "antd"
-import { useTheme } from "@/theme/ThemeProvider"
+import { useTheme } from "@/hooks/useTheme"
 import React from "react"
 import SvgIcon from "@/components/SvgIcon"
 
