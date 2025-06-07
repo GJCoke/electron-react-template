@@ -108,12 +108,12 @@ export class MainApp {
             {
               label: "打开日志文件",
               click: () => shell.openPath(logger.getFilePath()),
-              accelerator: "CommandOrControl+Alt+L"
+              accelerator: "CommandOrControl+Alt+L",
             },
             { type: "separator" },
             { role: "toggleDevTools", label: "切换开发者工具" },
-          ]
-        }
+          ],
+        },
       ],
     })
   }
