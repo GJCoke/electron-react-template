@@ -121,7 +121,7 @@
     "vite-plugin-electron-renderer": "^0.14.6"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm run lint && pnpm run format",
+    "pre-commit": "pnpm run format && pnpm run lint",
     "commit-msg": "pnpm sa git-commit-verify"
   }
 }
