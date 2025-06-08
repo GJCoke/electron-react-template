@@ -7,11 +7,12 @@ interface MenuItemProps {
   style?: CSSProperties
   title: string
   icon: string
+  localIcon?: string
   to?: string
   isActive?: boolean
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon, to, isActive }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon, localIcon, to, isActive }) => {
   const navigation = useNavigate()
 
   return (
@@ -23,7 +24,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon, to, 
       }}
     >
       <div>
-        <SvgIcon className="text-22px" icon={icon} />
+        <SvgIcon className="text-22px" icon={icon} localIcon={localIcon} />
       </div>
       <div className="text-10px font-black">{title}</div>
     </div>

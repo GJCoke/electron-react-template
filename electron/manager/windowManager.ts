@@ -31,6 +31,24 @@ export class WindowManager {
       if (!win) return
       win.isMaximized() ? win.unmaximize() : win.maximize()
     })
+
+    this.handler.handle("window:isMaximized", (event) => {
+      const win = BrowserWindow.fromWebContents(event.sender)
+      if (!win) return
+      return win.isMaximized()
+    })
+
+    this.handler.handle("window:isMinimized", (event) => {
+      const win = BrowserWindow.fromWebContents(event.sender)
+      if (!win) return
+      return win.isMinimized()
+    })
+
+    this.handler.on("window:close", (event) => {
+      const win = BrowserWindow.fromWebContents(event.sender)
+      if (!win) return
+      win.close()
+    })
   }
 
   createWindow({ key, options, url }: WindowOptions): BrowserWindow {

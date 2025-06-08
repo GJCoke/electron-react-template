@@ -1,12 +1,14 @@
 /// <reference types="vite/client" />
 interface Window {
   electronAPI?: {
-    ping: () => Promise<string>
+    platform: () => Promise<string>
   }
 
   electronWindow?: {
     maximize: () => void
     minimize: () => void
+    isMaximized: () => Promise<boolean>
+    isMinimized: () => Promise<boolean>
     toggleMaximize: () => void
     close: () => void
   }

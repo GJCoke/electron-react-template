@@ -35,7 +35,7 @@ export class MainApp {
   }
 
   private registerIpcHandlers() {
-    this.ipcHandler.handle("ping", () => "pong1")
+    this.ipcHandler.handle("platform", () => process.platform)
   }
 
   private registerIpcListeners() {

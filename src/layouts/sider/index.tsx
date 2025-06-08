@@ -56,13 +56,14 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
   return (
     <Layout.Sider width="64px" className={`${className} bg-transparent`} style={style} ref={containerRef}>
       <div className="flex flex-col justify-center items-center" style={{ gap: MENU_ITEM_GAP }}>
-        {visibleItems.map(({ handle: { title, icon }, path }, i) => {
+        {visibleItems.map(({ handle: { title, icon, localIcon }, path }, i) => {
           return (
             <MenuItem
               className="w-56px"
               style={{ height: MENU_ITEM_HEIGHT }}
               title={title}
               icon={icon}
+              localIcon={localIcon}
               key={i}
               to={path}
               isActive={i === activeVisibleIndex}
@@ -88,7 +89,7 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
                         setOpen(false)
                       }}
                     >
-                      <SvgIcon icon={item.handle.icon} className="text-22px" />
+                      <SvgIcon localIcon={item.handle.localIcon} icon={item.handle.icon} className="text-22px" />
                       {item.handle.title}
                     </div>
                   )
