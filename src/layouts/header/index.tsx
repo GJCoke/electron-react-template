@@ -9,12 +9,11 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ className }) => {
-
   const [layout, setLayout] = useState<Layout>("right-header")
 
   const setSystemLayout = async () => {
-    const platform = await window.electronAPI?.platform() ?? 'darwin'
-    const isMac = platform === 'darwin'
+    const platform = (await window.electronAPI?.platform()) ?? "darwin"
+    const isMac = platform === "darwin"
     setLayout(isMac ? "right-header" : "left-header")
   }
 
@@ -26,8 +25,10 @@ const Header: React.FC<Props> = ({ className }) => {
     window.electronWindow?.toggleMaximize()
   }
 
-  return (
-    layout === "right-header" ? <RightHeader className={className} maximize={handelToggleMaximize} /> : <LeftHeader className={className} maximize={handelToggleMaximize} />
+  return layout === "right-header" ? (
+    <RightHeader className={className} maximize={handelToggleMaximize} />
+  ) : (
+    <LeftHeader className={className} maximize={handelToggleMaximize} />
   )
 }
 

@@ -15,7 +15,6 @@ interface Props {
 }
 
 const LeftHeader: React.FC<Props> = ({ className, maximize }) => {
-
   const [isMaximize, setIsMaximize] = useState<boolean>(false)
   const [notMac, setNotMac] = useState<boolean>(false)
 
@@ -27,13 +26,13 @@ const LeftHeader: React.FC<Props> = ({ className, maximize }) => {
   const handelClose = () => window.electronWindow?.close()
 
   const setWindowIsMaximized = async () => {
-    const maximize = await window.electronWindow?.isMaximized() ?? false
+    const maximize = (await window.electronWindow?.isMaximized()) ?? false
     setIsMaximize(maximize)
   }
 
   const setSystem = async () => {
-    const platform = await window.electronAPI?.platform() ?? 'darwin'
-    setNotMac(platform !== 'darwin')
+    const platform = (await window.electronAPI?.platform()) ?? "darwin"
+    setNotMac(platform !== "darwin")
   }
 
   useEffect(() => {
@@ -56,18 +55,16 @@ const LeftHeader: React.FC<Props> = ({ className, maximize }) => {
           <Push />
         </div>
         <div className="w-100px" />
-        {
-          notMac && (
-            <div className="absolute top-1 right-1 flex z-100">
-              <IconButton icon="qlementine-icons:windows-minimize-16" onClick={handelMinimize} />
-              <IconButton
-                icon={isMaximize ? "qlementine-icons:windows-unmaximize-16" : "qlementine-icons:windows-maximize-16"}
-                onClick={handelMaximize}
-              />
-              <IconButton icon="qlementine-icons:windows-close-16" onClick={handelClose} />
-            </div>
-          )
-        }
+        {notMac && (
+          <div className="absolute top-1 right-1 flex z-100">
+            <IconButton icon="qlementine-icons:windows-minimize-16" onClick={handelMinimize} />
+            <IconButton
+              icon={isMaximize ? "qlementine-icons:windows-unmaximize-16" : "qlementine-icons:windows-maximize-16"}
+              onClick={handelMaximize}
+            />
+            <IconButton icon="qlementine-icons:windows-close-16" onClick={handelClose} />
+          </div>
+        )}
       </div>
     </Layout.Header>
   )
