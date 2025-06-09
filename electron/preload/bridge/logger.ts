@@ -11,12 +11,16 @@ export const consoleMethodMap = {
 
 export type LogLevel = keyof typeof consoleMethodMap
 
-export const loggerBridge: Record<LogLevel, (...args: unknown[]) => void> =
-  (Object.keys(consoleMethodMap) as LogLevel[]).reduce((acc, level) => {
+export const loggerBridge: Record<LogLevel, (...args: unknown[]) => void> = (
+  Object.keys(consoleMethodMap) as LogLevel[]
+).reduce(
+  (acc, level) => {
     acc[level] = (...args: unknown[]) => {
       ipcRenderer.send("log", level, ...args)
       const method = consoleMethodMap[level]
       console[method]?.(`[${level}]`, ...args)
     }
     return acc
-  }, {} as Record<LogLevel, (...args: unknown[]) => void>)
+  },
+  {} as Record<LogLevel, (...args: unknown[]) => void>
+)
