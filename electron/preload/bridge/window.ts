@@ -16,5 +16,5 @@ export const windowBridge = {
     ipcRenderer.on("window:isUnmaximize", () => {
       callback()
     })
-  }
+  },
 }

@@ -101,13 +101,16 @@ export class AppUpdater {
           return this.win.webContents.send("update:downloaded", { force, version, info })
         }
 
-        this.macUpdater.downloadDmg(dmgUrl, fullUrl, (percent) => {
-          this.win.webContents.send("update:progress", percent)
-        }).then(() => {
-          this.win.webContents.send("update:downloaded", { force, version, info })
-        }).catch((err) => {
-          this.win.webContents.send("update:error", err.message)
-        })
+        this.macUpdater
+          .downloadDmg(dmgUrl, fullUrl, (percent) => {
+            this.win.webContents.send("update:progress", percent)
+          })
+          .then(() => {
+            this.win.webContents.send("update:downloaded", { force, version, info })
+          })
+          .catch((err) => {
+            this.win.webContents.send("update:error", err.message)
+          })
       }
     })
 

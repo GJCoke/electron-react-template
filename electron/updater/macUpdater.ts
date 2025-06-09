@@ -21,11 +21,7 @@ export class MacUpdater {
     return !fs.existsSync(this.saveDmgPath)
   }
 
-  async downloadDmg(
-    url: string,
-    dest: string,
-    onProgress?: (percent: number) => void
-  ): Promise<void> {
+  async downloadDmg(url: string, dest: string, onProgress?: (percent: number) => void): Promise<void> {
     if (!this.saveDmgPath) return
     return new Promise((resolve, reject) => {
       const file = fs.createWriteStream(dest)
