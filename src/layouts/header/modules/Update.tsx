@@ -73,7 +73,7 @@ const Update: React.FC = () => {
   }, [])
 
   const handelClickButton = () => {
-    window.electronUpdater?.installUpdate().then()
+    window.electronUpdater?.installUpdate()
   }
 
   const content = (

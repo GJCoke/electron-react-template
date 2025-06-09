@@ -11,10 +11,9 @@ import IconButton from "@/layouts/header/modules/IconButton.tsx"
 
 interface Props {
   className?: string
-  maximize: () => void
 }
 
-const LeftHeader: React.FC<Props> = ({ className, maximize }) => {
+const LeftHeader: React.FC<Props> = ({ className }) => {
   const [isMaximize, setIsMaximize] = useState<boolean>(false)
   const [notMac, setNotMac] = useState<boolean>(false)
 
@@ -42,7 +41,7 @@ const LeftHeader: React.FC<Props> = ({ className, maximize }) => {
 
   return (
     <Layout.Header className={`${className} drag h-44px lh-normal flex flex-col justify-center p-x select-none`}>
-      <div className="flex justify-between items-center" onDoubleClick={maximize}>
+      <div className="flex justify-between items-center">
         <div className="flex gap-3 justify-center items-center">
           <Avatar />
           <Help />

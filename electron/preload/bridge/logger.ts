@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron"
 
-const consoleMethodMap = {
+export const consoleMethodMap = {
   error: "error",
   warn: "warn",
   info: "info",
@@ -9,13 +9,14 @@ const consoleMethodMap = {
   silly: "log",
 } as const
 
-type LogLevel = keyof typeof consoleMethodMap
+export type LogLevel = keyof typeof consoleMethodMap
 
-export const loggerBridge: Record<LogLevel, (...args: unknown[]) => void> = {} as never
-;(Object.keys(consoleMethodMap) as LogLevel[]).forEach((level) => {
-  loggerBridge[level] = (...args: unknown[]) => {
-    ipcRenderer.send("log", level, ...args)
-    const method = consoleMethodMap[level]
-    console[method]?.(`[${level}]`, ...args)
-  }
-})
+export const loggerBridge: Record<LogLevel, (...args: unknown[]) => void> =
+  (Object.keys(consoleMethodMap) as LogLevel[]).reduce((acc, level) => {
+    acc[level] = (...args: unknown[]) => {
+      ipcRenderer.send("log", level, ...args)
+      const method = consoleMethodMap[level]
+      console[method]?.(`[${level}]`, ...args)
+    }
+    return acc
+  }, {} as Record<LogLevel, (...args: unknown[]) => void>)

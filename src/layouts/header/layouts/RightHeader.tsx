@@ -10,13 +10,12 @@ import Search from "../modules/Search"
 
 interface Props {
   className?: string
-  maximize: () => void
 }
 
-const RightHeader: React.FC<Props> = ({ className, maximize }) => {
+const RightHeader: React.FC<Props> = ({ className }) => {
   return (
     <Layout.Header className={`${className} drag h-44px lh-normal flex flex-col justify-center p-x select-none`}>
-      <div className="flex justify-between items-center" onDoubleClick={maximize}>
+      <div className="flex justify-between items-center">
         <div className="w-100px" />
         <div className="flex gap-4 justify-center items-center w-1/3">
           <History />

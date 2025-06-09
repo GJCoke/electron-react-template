@@ -21,11 +21,11 @@ export const updaterBridge = {
     ipcRenderer.on("update:progress", (_, percent) => cb(percent))
   },
 
-  installUpdate: (): Promise<void> => {
-    return ipcRenderer.invoke("update:install")
+  installUpdate: () => {
+    ipcRenderer.send("update:install")
   },
 
   updateReady: () => {
-    return ipcRenderer.invoke("update:ready")
+    ipcRenderer.send("update:ready")
   },
 }

@@ -21,15 +21,7 @@ const Header: React.FC<Props> = ({ className }) => {
     setSystemLayout().then()
   }, [])
 
-  const handelToggleMaximize = () => {
-    window.electronWindow?.toggleMaximize()
-  }
-
-  return layout === "right-header" ? (
-    <RightHeader className={className} maximize={handelToggleMaximize} />
-  ) : (
-    <LeftHeader className={className} maximize={handelToggleMaximize} />
-  )
+  return layout === "right-header" ? <RightHeader className={className} /> : <LeftHeader className={className} />
 }
 
 export default Header
