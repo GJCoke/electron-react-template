@@ -100,7 +100,7 @@ export class AppUpdater {
   }
 
   private registerEvents() {
-    this.handler.handle("update:install", () => {
+    this.handler.on("update:install", () => {
       logger.info("Starting application installation")
       if (isMac) {
         if (!this.saveDmgPath) return
@@ -130,7 +130,7 @@ export class AppUpdater {
       { leading: true, trailing: false }
     )
 
-    this.handler.handle("update:ready", () => {
+    this.handler.on("update:ready", () => {
       throttledCheck()
     })
   }
