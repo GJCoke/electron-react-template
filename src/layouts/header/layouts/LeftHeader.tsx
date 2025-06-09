@@ -17,12 +17,12 @@ const LeftHeader: React.FC<Props> = ({ className }) => {
   const [isMaximize, setIsMaximize] = useState<boolean>(false)
   const [notMac, setNotMac] = useState<boolean>(false)
 
-  const handelMaximize = async () => {
-    window.electronWindow?.toggleMaximize()
-    setIsMaximize((prevState) => !prevState)
-  }
+  const handelMaximize = async () => window.electronWindow?.toggleMaximize()
   const handelMinimize = () => window.electronWindow?.minimize()
   const handelClose = () => window.electronWindow?.close()
+
+  window.electronWindow?.onMaximize(() => setIsMaximize(true))
+  window.electronWindow?.onUnmaximize(() => setIsMaximize(false))
 
   const setWindowIsMaximized = async () => {
     const maximize = (await window.electronWindow?.isMaximized()) ?? false

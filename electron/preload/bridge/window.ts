@@ -7,4 +7,14 @@ export const windowBridge = {
   isMaximized: (): Promise<boolean> => ipcRenderer.invoke("window:isMaximized"),
   isMinimized: (): Promise<boolean> => ipcRenderer.invoke("window:isMinimized"),
   close: () => ipcRenderer.send("window:close"),
+  onMaximize: (callback: () => void) => {
+    ipcRenderer.on("window:isMaximize", () => {
+      callback()
+    })
+  },
+  onUnmaximize: (callback: () => void) => {
+    ipcRenderer.on("window:isUnmaximize", () => {
+      callback()
+    })
+  }
 }

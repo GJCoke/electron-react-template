@@ -11,6 +11,8 @@ interface Window {
     isMinimized: () => Promise<boolean>
     toggleMaximize: () => void
     close: () => void
+    onMaximize: (callback: () => void) => void
+    onUnmaximize: (callback: () => void) => void
   }
 
   electronLogger?: {

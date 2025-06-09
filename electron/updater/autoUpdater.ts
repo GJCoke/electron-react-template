@@ -1,70 +1,25 @@
 import { autoUpdater, type UpdateFileInfo } from "electron-updater"
-import { BrowserWindow, shell } from "electron"
+import { BrowserWindow } from "electron"
 import { Logger } from "../utils/logger"
 import { IpcHandler } from "../core/ipcHandler.ts"
-import { isMac, DownloadsPath } from "../utils/constants.ts"
-import fs from "node:fs"
-import https from "node:https"
-import http from "node:http"
+import { isMac } from "../utils/constants.ts"
 import { WindowManager } from "../manager/windowManager.ts"
 import { ensureEndsWithSlash } from "../utils/utils.ts"
-import path from "node:path"
 import { throttle } from "lodash"
+import { MacUpdater } from "./macUpdater.ts"
 
 const logger = new Logger("Updater")
 
 // dev auto updater.
 // dev env updater test need project dir add dev-app-update.yml file
-// autoUpdater.forceDevUpdateConfig = true
-
-function downloadDmg(url: string, dest: string, onProgress?: (percent: number) => void): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest)
-    const client = url.startsWith("https") ? https : http
-
-    const throttledProgress = onProgress
-      ? throttle((percent: number) => {
-          onProgress(parseFloat(percent.toFixed(2)))
-        }, 200)
-      : undefined
-
-    client
-      .get(url, (response) => {
-        if (response.statusCode !== 200) {
-          reject(new Error(`Download failed: ${response.statusCode}`))
-          return
-        }
-
-        const total = parseInt(response.headers["content-length"] || "0", 10)
-        let downloaded = 0
-
-        response.on("data", (chunk) => {
-          downloaded += chunk.length
-          if (total && onProgress) {
-            const percent = (downloaded / total) * 100
-            throttledProgress?.(parseFloat(percent.toFixed(2)))
-          }
-        })
-
-        response.pipe(file)
-        file.on("finish", () => {
-          file.close()
-          resolve()
-        })
-      })
-      .on("error", (err) => {
-        fs.unlink(dest, () => {})
-        reject(err)
-      })
-  })
-}
+autoUpdater.forceDevUpdateConfig = true
 
 export class AppUpdater {
   private win: BrowserWindow
   private handler: IpcHandler
   private winManager: WindowManager
   private readonly updateUrl: string = ensureEndsWithSlash(import.meta.env.VITE_UPDATER_URL)
-  private saveDmgPath: string | null = null
+  private macUpdater: MacUpdater | null = isMac ? new MacUpdater() : null
 
   constructor(win: BrowserWindow, handler: IpcHandler, winManager: WindowManager) {
     this.win = win
@@ -103,15 +58,8 @@ export class AppUpdater {
     this.handler.on("update:install", () => {
       logger.info("Starting application installation")
       if (isMac) {
-        if (!this.saveDmgPath) return
-        shell.openPath(this.saveDmgPath).then((errorMessage) => {
-          if (errorMessage) {
-            logger.error("Failed to open file: ", errorMessage)
-          } else {
-            logger.debug("File opened successfully: ", this.saveDmgPath)
-            this.winManager.closeAll()
-          }
-        })
+        this.macUpdater?.openDmgAndCloseApp()
+        this.winManager.closeAll()
       } else {
         autoUpdater.quitAndInstall()
       }
@@ -144,28 +92,22 @@ export class AppUpdater {
     autoUpdater.on("update-available", (updateInfo) => {
       const { force, info, version } = updateInfo as unknown as UpdateInfo
       logger.info(`New version available, version: ${version}, mandatory update: ${force}, version features: ${info}`)
-      this.win.webContents.send("update:available", { force, info, version })
+      this.win.webContents.send("update:available", { force: force || false, info: info || "", version })
 
       const dmgUrl = this.getDmgUrl(updateInfo.files)
-      if (isMac && dmgUrl) {
-        this.saveDmgPath = path.join(DownloadsPath, dmgUrl)
-
-        if (fs.existsSync(this.saveDmgPath)) {
+      if (isMac && dmgUrl && this.macUpdater) {
+        const fullUrl = `${this.updateUrl}${dmgUrl}`
+        if (!this.macUpdater.shouldDownload(dmgUrl)) {
           return this.win.webContents.send("update:downloaded", { force, version, info })
         }
 
-        downloadDmg(`${this.updateUrl}${dmgUrl}`, this.saveDmgPath, (percent) => {
-          logger.info(`Package download progress: ${percent}%`)
+        this.macUpdater.downloadDmg(dmgUrl, fullUrl, (percent) => {
           this.win.webContents.send("update:progress", percent)
+        }).then(() => {
+          this.win.webContents.send("update:downloaded", { force, version, info })
+        }).catch((err) => {
+          this.win.webContents.send("update:error", err.message)
         })
-          .then(() => {
-            logger.info("DMG download completed. Path:", this.saveDmgPath)
-            this.win.webContents.send("update:downloaded", { force, version, info })
-          })
-          .catch((err: Error) => {
-            this.win.webContents.send("update:error", err.message)
-            logger.error("Download failed: ", err.message)
-          })
       }
     })
 
@@ -187,7 +129,7 @@ export class AppUpdater {
     autoUpdater.on("update-downloaded", (updateInfo) => {
       const { force, version, info } = updateInfo as unknown as UpdateInfo
       logger.info(`Package download completed. Version: ${version}, Mandatory Update: ${force}`)
-      this.win.webContents.send("update:downloaded", { force, version, info })
+      this.win.webContents.send("update:downloaded", { force: force || false, info: info || "", version })
     })
   }
 

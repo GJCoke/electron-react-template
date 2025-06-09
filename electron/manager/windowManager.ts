@@ -79,6 +79,14 @@ export class WindowManager {
       this.windows.delete(key)
     })
 
+    win.on("maximize", () => {
+      win.webContents.send("window:isMaximize")
+    })
+
+    win.on("unmaximize", () => {
+      win.webContents.send("window:isUnmaximize")
+    })
+
     return win
   }
 
