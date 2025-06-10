@@ -1,13 +1,16 @@
 import { BrowserWindow } from "electron"
 import { IpcHandler } from "../core/ipcHandler.ts"
-import { indexHtml, preloadPath, VITE_DEV_SERVER_URL } from "../utils/constants.ts"
+import { indexHtml, loadingHtml, preloadPath, VITE_DEV_SERVER_URL } from "../utils/constants.ts"
+import { StoreManager } from "./storeManager.ts"
 
 export class WindowManager {
   private windows = new Map<string, BrowserWindow>()
   private handler: IpcHandler
+  private themeStore: StoreManager<ThemeStore>
 
-  constructor(handler: IpcHandler) {
+  constructor(handler: IpcHandler, theme: StoreManager<ThemeStore>) {
     this.handler = handler
+    this.themeStore = theme
     this.registerEvents()
   }
 
@@ -51,19 +54,15 @@ export class WindowManager {
     })
   }
 
-  loadTarget = (win: BrowserWindow, url?: string, path?: string) => {
+  private loadTarget = (win: BrowserWindow, url?: string, path?: string) => {
     if (url) return win.loadURL(url)
     if (path) return win.loadFile(path)
     if (VITE_DEV_SERVER_URL) return win.loadURL(VITE_DEV_SERVER_URL)
     return win.loadFile(indexHtml)
   }
 
-  createWindow({ key, options, url, path }: WindowOptions): BrowserWindow {
-    if (this.windows.has(key)) {
-      return this.windows.get(key)!
-    }
-
-    const win = new BrowserWindow({
+  private setLoading = (options: Electron.BrowserWindowConstructorOptions) => {
+    const loadingWindow = new BrowserWindow({
       ...options,
       webPreferences: {
         preload: preloadPath,
@@ -71,6 +70,43 @@ export class WindowManager {
         nodeIntegration: false,
         ...options.webPreferences,
       },
+    })
+    loadingWindow.loadFile(loadingHtml).then()
+    loadingWindow.webContents
+      .executeJavaScript(
+        `
+    document.documentElement.style.setProperty('--color-bg', '${this.themeStore.get("backgroundColor")}');
+    document.documentElement.style.setProperty('--color-primary', '${this.themeStore.get("primaryColor")}');
+  `
+      )
+      .then()
+
+    return loadingWindow
+  }
+
+  createWindow({ key, options, url, path }: WindowOptions): BrowserWindow {
+    if (this.windows.has(key)) {
+      return this.windows.get(key)!
+    }
+
+    const loadingWindow = this.setLoading(options)
+    const win = new BrowserWindow({
+      ...options,
+      show: false,
+      webPreferences: {
+        preload: preloadPath,
+        contextIsolation: true,
+        nodeIntegration: false,
+        ...options.webPreferences,
+      },
+    })
+
+    win.webContents.on("did-finish-load", () => {
+      setTimeout(() => {
+        if (loadingWindow.isDestroyed()) return
+        loadingWindow.close()
+        win.show()
+      }, 500)
     })
 
     this.loadTarget(win, url, path).then()

@@ -6,18 +6,17 @@ import { TrayManager } from "../manager/trayManager"
 import { MenuManager } from "../manager/menuManager"
 import { AppUpdater } from "../updater/autoUpdater"
 import { StoreManager } from "../manager/storeManager.ts"
-import { loadingHtml } from "../utils/constants.ts"
 
 const logger = new Logger("MainProcess")
 
 export class MainApp {
   private ipcHandler = new IpcHandler()
-  private windowManager = new WindowManager(this.ipcHandler)
   private trayManager = new TrayManager()
   private menuManager = new MenuManager()
   private renderLogger = new Logger("RenderProcess")
   private renderStore = new StoreManager("renderStore")
   private themeStore = new StoreManager<ThemeStore>("themeStore")
+  private windowManager = new WindowManager(this.ipcHandler, this.themeStore)
 
   constructor() {
     this.registerAppEvents()
@@ -69,38 +68,9 @@ export class MainApp {
         frame: false,
         titleBarStyle: "hiddenInset",
         trafficLightPosition: { x: 8, y: 14 },
-        show: false,
-      },
-    })
-    const loadingWindow = this.windowManager.createWindow({
-      key: "loading",
-      path: loadingHtml,
-      options: {
-        width: windowWidth,
-        height: windowHeight,
-        minWidth: windowMinWidth,
-        minHeight: windowMinHeight,
-        frame: false,
-        titleBarStyle: "hiddenInset",
-        trafficLightPosition: { x: 8, y: 14 },
       },
     })
     new AppUpdater(mainWindow, this.ipcHandler, this.windowManager)
-    loadingWindow.webContents
-      .executeJavaScript(
-        `
-    document.documentElement.style.setProperty('--color-bg', '${this.themeStore.get("backgroundColor")}');
-    document.documentElement.style.setProperty('--color-primary', '${this.themeStore.get("primaryColor")}');
-  `
-      )
-      .then()
-    mainWindow.webContents.on("did-finish-load", () => {
-      setTimeout(() => {
-        if (loadingWindow.isDestroyed()) return
-        loadingWindow.close()
-        mainWindow.show()
-      }, 500)
-    })
   }
 
   private setupTray() {
