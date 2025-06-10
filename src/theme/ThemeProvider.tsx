@@ -22,9 +22,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode)
     localStorage.setItem(THEME_STORAGE_KEY, mode)
-    const rootStyles = window.getComputedStyle(document.documentElement);
-    const cssPrimaryValue = rootStyles.getPropertyValue('--color-primary').trim();
-    const cssBackgroundValue = rootStyles.getPropertyValue('--color-bg').trim();
+    const rootStyles = window.getComputedStyle(document.documentElement)
+    const cssPrimaryValue = rootStyles.getPropertyValue("--color-primary").trim()
+    const cssBackgroundValue = rootStyles.getPropertyValue("--color-bg").trim()
     window.electronStore?.themeSet("primaryColor", cssPrimaryValue).then()
     window.electronStore?.themeSet("backgroundColor", cssBackgroundValue).then()
   }, [mode])

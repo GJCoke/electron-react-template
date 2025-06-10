@@ -69,7 +69,7 @@ export class MainApp {
         frame: false,
         titleBarStyle: "hiddenInset",
         trafficLightPosition: { x: 8, y: 14 },
-        show: false
+        show: false,
       },
     })
     const loadingWindow = this.windowManager.createWindow({
@@ -86,11 +86,15 @@ export class MainApp {
       },
     })
     new AppUpdater(mainWindow, this.ipcHandler, this.windowManager)
-    loadingWindow.webContents.executeJavaScript(`
+    loadingWindow.webContents
+      .executeJavaScript(
+        `
     document.documentElement.style.setProperty('--color-bg', '${this.themeStore.get("backgroundColor")}');
     document.documentElement.style.setProperty('--color-primary', '${this.themeStore.get("primaryColor")}');
-  `).then()
-    mainWindow.webContents.on('did-finish-load', () => {
+  `
+      )
+      .then()
+    mainWindow.webContents.on("did-finish-load", () => {
       setTimeout(() => {
         if (loadingWindow.isDestroyed()) return
         loadingWindow.close()

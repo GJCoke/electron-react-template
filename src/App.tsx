@@ -6,7 +6,6 @@ const AppRoutes = () => {
 }
 
 function App() {
-
   return (
     <>
       <BrowserRouter>

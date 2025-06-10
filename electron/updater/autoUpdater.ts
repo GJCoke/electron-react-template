@@ -6,7 +6,7 @@ import { isMac } from "../utils/constants.ts"
 import { WindowManager } from "../manager/windowManager.ts"
 import { ensureEndsWithSlash } from "../utils/utils.ts"
 import { MacUpdater } from "./macUpdater.ts"
-import updater from 'electron-updater'
+import updater from "electron-updater"
 import { throttle } from "lodash-es"
 
 const { autoUpdater } = updater

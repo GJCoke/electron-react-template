@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Input } from "antd"
 
 const Electron: React.FC = () => {
-
   const [value, setValue] = useState("")
 
   const set = async (value: string) => {
@@ -23,7 +22,7 @@ const Electron: React.FC = () => {
     <div>
       Electron
       <Input onChange={(e) => handelChangeInput(e.target.value)} />
-      <div>{ value }</div>
+      <div>{value}</div>
     </div>
   )
 }

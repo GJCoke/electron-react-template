@@ -7,7 +7,7 @@ export class StoreManager<T extends Record<string, StoreType> = Record<string, S
     this.store = new Store<T>({
       name,
       ...(schema && { schema }),
-      encryptionKey: import.meta.env.VITE_STORE_ENCRYPTION_KEY
+      encryptionKey: import.meta.env.VITE_STORE_ENCRYPTION_KEY,
     })
   }
 
