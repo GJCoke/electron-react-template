@@ -51,7 +51,14 @@ export class WindowManager {
     })
   }
 
-  createWindow({ key, options, url }: WindowOptions): BrowserWindow {
+  loadTarget = (win: BrowserWindow, url?: string, path?: string) => {
+    if (url) return win.loadURL(url)
+    if (path) return win.loadFile(path)
+    if (VITE_DEV_SERVER_URL) return win.loadURL(VITE_DEV_SERVER_URL)
+    return win.loadFile(indexHtml)
+  }
+
+  createWindow({ key, options, url, path }: WindowOptions): BrowserWindow {
     if (this.windows.has(key)) {
       return this.windows.get(key)!
     }
@@ -65,13 +72,8 @@ export class WindowManager {
         ...options.webPreferences,
       },
     })
-    if (url) {
-      win.loadURL(url).then()
-    } else if (VITE_DEV_SERVER_URL) {
-      win.loadURL(VITE_DEV_SERVER_URL).then()
-    } else {
-      win.loadFile(indexHtml).then()
-    }
+
+    this.loadTarget(win, url, path).then()
 
     this.windows.set(key, win)
 

@@ -12,4 +12,12 @@ interface WindowOptions {
   key: string
   options: Electron.BrowserWindowConstructorOptions
   url?: string
+  path?: string
+}
+
+type StoreType = string | number | boolean | object | Array
+
+interface ThemeStore {
+  backgroundColor: string
+  primaryColor: string
 }

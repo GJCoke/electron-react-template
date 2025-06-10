@@ -7,6 +7,7 @@ const Dashboard = lazy(() => import("@/views/Home"))
 const NotFound = lazy(() => import("@/views/error/404"))
 const Forbidden = lazy(() => import("@/views/error/403"))
 const ServerError = lazy(() => import("@/views/error/500"))
+const ElectronPage = lazy(() => import("@/views/electron"))
 
 export const routes: RouteObject[] = [
   {
@@ -33,6 +34,11 @@ export const routes: RouteObject[] = [
         path: "message1",
         element: <Dashboard />,
         handle: { title: "首页", icon: "hugeicons:home-03" },
+      },
+      {
+        path: "electron",
+        element: <ElectronPage />,
+        handle: { title: "进程", icon: "file-icons:electron" },
       },
       {
         path: "*",

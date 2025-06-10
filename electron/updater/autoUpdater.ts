@@ -1,18 +1,20 @@
-import { autoUpdater, type UpdateFileInfo } from "electron-updater"
+import { type UpdateFileInfo } from "electron-updater"
 import { BrowserWindow } from "electron"
 import { Logger } from "../utils/logger"
 import { IpcHandler } from "../core/ipcHandler.ts"
 import { isMac } from "../utils/constants.ts"
 import { WindowManager } from "../manager/windowManager.ts"
 import { ensureEndsWithSlash } from "../utils/utils.ts"
-import { throttle } from "lodash"
 import { MacUpdater } from "./macUpdater.ts"
+import updater from 'electron-updater'
+import { throttle } from "lodash-es"
 
+const { autoUpdater } = updater
 const logger = new Logger("Updater")
 
 // dev auto updater.
 // dev env updater test need project dir add dev-app-update.yml file
-autoUpdater.forceDevUpdateConfig = true
+// autoUpdater.forceDevUpdateConfig = true
 
 export class AppUpdater {
   private win: BrowserWindow

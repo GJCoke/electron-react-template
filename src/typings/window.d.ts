@@ -33,4 +33,12 @@ interface Window {
     onUpdateProgress: (callback: (percent: number) => void) => void
     updateReady: () => void
   }
+
+  electronStore?: {
+    get: (key: string) => Promise<StoreType>
+    set: (key: string, value: StoreType) => Promise<boolean>
+    delete: (key: string) => Promise<boolean>
+    clear: () => Promise<boolean>
+    themeSet: <K extends keyof ThemeStore>(key: K, value: ThemeStore[K]) => Promise<boolean>
+  }
 }

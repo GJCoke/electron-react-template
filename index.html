@@ -6,32 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <title>electron-react-template</title>
   </head>
-  <script>
-    window.addEventListener("message", (event) => {
-      if (event.data.payload === "removeLoading") {
-        const loader = document.getElementById("app-loading")
-        if (loader) loader.remove()
-      }
-    })
-    setTimeout(() => {
-      const loader = document.getElementById("app-loading")
-      if (loader) loader.remove()
-    }, 3000)
-  </script>
   <body>
-    <div id="app-loading">
-      <div class="sk-cube-grid">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
-      </div>
-    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

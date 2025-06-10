@@ -5,7 +5,7 @@ import { Logger } from "../utils/logger"
 import { DownloadsPath } from "../utils/constants"
 import https from "node:https"
 import http from "node:http"
-import { throttle } from "lodash"
+import { throttle } from "lodash-es"
 
 const logger = new Logger("MacUpdater")
 

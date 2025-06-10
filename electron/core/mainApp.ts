@@ -5,6 +5,8 @@ import { Logger } from "../utils/logger"
 import { TrayManager } from "../manager/trayManager"
 import { MenuManager } from "../manager/menuManager"
 import { AppUpdater } from "../updater/autoUpdater"
+import { StoreManager } from "../manager/storeManager.ts"
+import { loadingHtml } from "../utils/constants.ts"
 
 const logger = new Logger("MainProcess")
 
@@ -14,6 +16,8 @@ export class MainApp {
   private trayManager = new TrayManager()
   private menuManager = new MenuManager()
   private renderLogger = new Logger("RenderProcess")
+  private renderStore = new StoreManager("renderStore")
+  private themeStore = new StoreManager<ThemeStore>("themeStore")
 
   constructor() {
     this.registerAppEvents()
@@ -36,6 +40,11 @@ export class MainApp {
 
   private registerIpcHandlers() {
     this.ipcHandler.handle("platform", () => process.platform)
+    this.ipcHandler.handle("store:get", (_, key: string) => this.renderStore.get(key))
+    this.ipcHandler.handle("store:set", (_, key: string, value: StoreType) => this.renderStore.set(key, value))
+    this.ipcHandler.handle("store:delete", (_, key: string) => this.renderStore.delete(key))
+    this.ipcHandler.handle("store:clear", () => this.renderStore.clear())
+    this.ipcHandler.handle("theme:set", (_, key: keyof ThemeStore, value: StoreType) => this.themeStore.set(key, value))
   }
 
   private registerIpcListeners() {
@@ -46,19 +55,48 @@ export class MainApp {
 
   private createMainWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
+    const windowWidth = Math.floor(width * 0.8)
+    const windowHeight = Math.floor(height * 0.8)
+    const windowMinWidth = Math.floor(width * 0.6)
+    const windowMinHeight = Math.floor(height * 0.6)
     const mainWindow = this.windowManager.createWindow({
       key: "main",
       options: {
-        width: Math.floor(width * 0.8),
-        height: Math.floor(height * 0.8),
-        minWidth: Math.floor(width * 0.6),
-        minHeight: Math.floor(height * 0.6),
+        width: windowWidth,
+        height: windowHeight,
+        minWidth: windowMinWidth,
+        minHeight: windowMinHeight,
+        frame: false,
+        titleBarStyle: "hiddenInset",
+        trafficLightPosition: { x: 8, y: 14 },
+        show: false
+      },
+    })
+    const loadingWindow = this.windowManager.createWindow({
+      key: "loading",
+      path: loadingHtml,
+      options: {
+        width: windowWidth,
+        height: windowHeight,
+        minWidth: windowMinWidth,
+        minHeight: windowMinHeight,
         frame: false,
         titleBarStyle: "hiddenInset",
         trafficLightPosition: { x: 8, y: 14 },
       },
     })
     new AppUpdater(mainWindow, this.ipcHandler, this.windowManager)
+    loadingWindow.webContents.executeJavaScript(`
+    document.documentElement.style.setProperty('--color-bg', '${this.themeStore.get("backgroundColor")}');
+    document.documentElement.style.setProperty('--color-primary', '${this.themeStore.get("primaryColor")}');
+  `).then()
+    mainWindow.webContents.on('did-finish-load', () => {
+      setTimeout(() => {
+        if (loadingWindow.isDestroyed()) return
+        loadingWindow.close()
+        mainWindow.show()
+      }, 500)
+    })
   }
 
   private setupTray() {

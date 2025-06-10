@@ -1,5 +1,6 @@
 import { Tray, Menu, app, BrowserWindow, nativeImage } from "electron"
 import path from "path"
+import { __dirname } from "../utils/constants.ts"
 
 interface TrayOptions {
   key: string
