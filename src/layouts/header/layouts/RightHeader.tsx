@@ -14,7 +14,7 @@ interface Props {
 
 const RightHeader: React.FC<Props> = ({ className }) => {
   return (
-    <Layout.Header className={`${className} drag h-44px lh-normal flex flex-col justify-center p-x select-none`}>
+    <Layout.Header className={`${className} drag h-11 lh-normal flex flex-col justify-center p-x select-none`}>
       <div className="flex justify-between items-center">
         <div className="w-100px" />
         <div className="flex gap-4 justify-center items-center w-1/3">

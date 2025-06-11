@@ -9,6 +9,7 @@
     radial-gradient(circle at top left, #353c48 0%, #13151e 100%);
 
   /** text */
+  --base-text-color: #ffffff;
   --color-text-title: #f9fafb;
   --color-text-subtitle: #d1d5db;
   --color-text-body: #9ca3af;

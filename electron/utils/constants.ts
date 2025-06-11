@@ -6,6 +6,7 @@ import { app } from "electron"
 export const isMac = process.platform === "darwin"
 export const isWindows = process.platform === "win32"
 export const isLinux = process.platform === "linux"
+export const isDebug = !app.isPackaged
 
 export const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export const VITE_DEV_SERVER_URL = import.meta.env.VITE_DEV_SERVER_URL

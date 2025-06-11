@@ -1,5 +1,5 @@
 import React, { type CSSProperties, useEffect, useRef, useState } from "react"
-import { Layout, Popover } from "antd"
+import { Popover } from "antd"
 import MenuItem from "./modules/MenuItem"
 import { routes } from "@/router"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -54,12 +54,12 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
   const isMoreActive = overflowItems.some((item) => location.pathname === normalizeTo(item.path))
 
   return (
-    <Layout.Sider width="64px" className={`${className} bg-transparent`} style={style} ref={containerRef}>
+    <div className={`${className} w-16 h-full`} style={style} ref={containerRef}>
       <div className="flex flex-col justify-center items-center" style={{ gap: MENU_ITEM_GAP }}>
         {visibleItems.map(({ handle: { title, icon, localIcon }, path }, i) => {
           return (
             <MenuItem
-              className="w-56px"
+              className="w-14"
               style={{ height: MENU_ITEM_HEIGHT }}
               title={title}
               icon={icon}
@@ -99,9 +99,9 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
             open={open}
             onOpenChange={(open) => setOpen(open)}
           >
-            <div className="h-56px w-56px flex items-center justify-center cursor-pointer hover:bg-black/20 rounded-lg">
+            <div className="h-14 w-14 flex items-center justify-center cursor-pointer hover:bg-black/20 rounded-lg">
               <MenuItem
-                className="w-56px"
+                className="w-14"
                 style={{ height: MENU_ITEM_HEIGHT }}
                 title="更多"
                 icon="hugeicons:more-horizontal-square-01"
@@ -112,7 +112,7 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
           </Popover>
         )}
       </div>
-    </Layout.Sider>
+    </div>
   )
 }
 

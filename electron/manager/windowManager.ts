@@ -75,8 +75,8 @@ export class WindowManager {
     loadingWindow.webContents
       .executeJavaScript(
         `
-    document.documentElement.style.setProperty('--color-bg', '${this.themeStore.get("backgroundColor")}');
-    document.documentElement.style.setProperty('--color-primary', '${this.themeStore.get("primaryColor")}');
+    document.documentElement.style.setProperty('--color-bg', '${this.themeStore.get("backgroundColor") || "#fff"}');
+    document.documentElement.style.setProperty('--color-primary', '${this.themeStore.get("primaryColor") || "#000"}');
   `
       )
       .then()

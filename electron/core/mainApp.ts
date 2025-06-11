@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, shell } from "electron"
+import { app, BrowserWindow, MenuItemConstructorOptions, screen, shell } from "electron"
 import { IpcHandler } from "./ipcHandler"
 import { WindowManager } from "../manager/windowManager"
 import { Logger } from "../utils/logger"
@@ -6,6 +6,7 @@ import { TrayManager } from "../manager/trayManager"
 import { MenuManager } from "../manager/menuManager"
 import { AppUpdater } from "../updater/autoUpdater"
 import { StoreManager } from "../manager/storeManager.ts"
+import { isDebug } from "../utils/constants.ts"
 
 const logger = new Logger("MainProcess")
 
@@ -54,17 +55,13 @@ export class MainApp {
 
   private createMainWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
-    const windowWidth = Math.floor(width * 0.8)
-    const windowHeight = Math.floor(height * 0.8)
-    const windowMinWidth = Math.floor(width * 0.6)
-    const windowMinHeight = Math.floor(height * 0.6)
     const mainWindow = this.windowManager.createWindow({
       key: "main",
       options: {
-        width: windowWidth,
-        height: windowHeight,
-        minWidth: windowMinWidth,
-        minHeight: windowMinHeight,
+        width: Math.floor(width * 0.8),
+        height: Math.floor(height * 0.8),
+        minWidth: Math.floor(width * 0.6),
+        minHeight: Math.floor(height * 0.6),
         frame: false,
         titleBarStyle: "hiddenInset",
         trafficLightPosition: { x: 8, y: 14 },
@@ -79,63 +76,55 @@ export class MainApp {
   }
 
   private setupMenu() {
+
+    const devMenu: MenuItemConstructorOptions = {
+      label: "开发工具",
+      submenu: [
+        { role: "reload", label: "刷新" },
+        { role: "toggleDevTools", label: "切换开发者工具" },
+        { type: "separator" },
+        {
+          label: "打开日志文件",
+          click: () => shell.openPath(logger.getFilePath()),
+          accelerator: "CommandOrControl+Alt+L",
+        },
+      ]
+    }
+
+    const template: MenuItemConstructorOptions[] = [
+      {
+        label: app.getName(),
+        submenu: [{ role: "about" }, { type: "separator" }, { role: "quit" }],
+      },
+      {
+        label: "编辑",
+        submenu: [
+          { role: "undo", label: "撤销" },
+          { role: "redo", label: "重做" },
+          { type: "separator" },
+          { role: "cut", label: "剪切" },
+          { role: "copy", label: "复制" },
+          { role: "paste", label: "粘贴" },
+          { role: "pasteAndMatchStyle", label: "粘贴并匹配样式" },
+          { role: "selectAll", label: "全选" },
+        ],
+      }
+    ]
+
+    isDebug && template.push(devMenu)
+
     this.menuManager.createMenu({
       key: "main",
-      template: [
-        {
-          label: app.getName(),
-          submenu: [{ role: "about" }, { type: "separator" }, { role: "quit" }],
-        },
-        {
-          label: "编辑",
-          submenu: [
-            { role: "undo", label: "撤销" },
-            { role: "redo", label: "重做" },
-            { type: "separator" },
-            { role: "cut", label: "剪切" },
-            { role: "copy", label: "复制" },
-            { role: "paste", label: "粘贴" },
-            { role: "pasteAndMatchStyle", label: "粘贴并匹配样式" },
-            { role: "selectAll", label: "全选" },
-          ],
-        },
-        {
-          label: "窗口",
-          submenu: [
-            { role: "minimize", label: "最小化" },
-            { role: "close", label: "关闭" },
-          ],
-        },
-        {
-          label: "视图",
-          submenu: [
-            { role: "reload", label: "刷新" },
-            { type: "separator" },
-            { role: "togglefullscreen", label: "全屏切换" },
-          ],
-        },
-        {
-          label: "工具",
-          submenu: [
-            {
-              label: "打开日志文件",
-              click: () => shell.openPath(logger.getFilePath()),
-              accelerator: "CommandOrControl+Alt+L",
-            },
-            { type: "separator" },
-            { role: "toggleDevTools", label: "切换开发者工具" },
-          ],
-        },
-      ],
+      template
     })
   }
 
   public start() {
     app.whenReady().then(() => {
       logger.info("App started")
-      this.createMainWindow()
-      this.setupTray()
       this.setupMenu()
+      this.setupTray()
+      this.createMainWindow()
     })
   }
 }

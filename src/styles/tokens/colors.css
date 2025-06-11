@@ -16,6 +16,7 @@
   );
 
   /** text */
+  --base-text-color: #242424;
   --color-text-title: #1f2937;
   --color-text-subtitle: #4b5563;
   --color-text-body: #6b7280;

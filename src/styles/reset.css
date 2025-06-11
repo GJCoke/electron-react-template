@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: normal;
   color-scheme: light dark;
+  line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -10,8 +11,9 @@
 
 body {
   margin: 0;
-  line-height: normal;
+  line-height: inherit;
   position: fixed;
+  color: var(--base-text-color);
 }
 
 a {

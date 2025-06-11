@@ -1,28 +1,27 @@
 import React, { Suspense } from "react"
-import { Layout, Watermark } from "antd"
-import Header from "./header/index"
-import Sider from "./sider"
 import { Outlet } from "react-router-dom"
 import LoadingSpinner from "../components/LoadingSpinner"
-
-const { Content } = Layout
+import Header from "./header"
+import Sider from "./sider"
 
 const Layouts: React.FC = () => {
   return (
-    <div className="surface">
-      <Layout className="w-screen h-screen bg-transparent">
-        <Header className="bg-transparent c-text-surface" />
-        <Layout className="bg-transparent">
-          <Sider className="c-text-surface" />
-          <Content className="rounded-tl-xl bg-background">
-            <Watermark font={{ fontSize: 12 }} content="Coke" className="h-full w-full p-xy">
-              <Suspense fallback={<LoadingSpinner />}>
-                <Outlet />
-              </Suspense>
-            </Watermark>
-          </Content>
-        </Layout>
-      </Layout>
+    <div className="w-screen h-screen flex flex-col surface">
+      <div className="h-11 flex-shrink-0 c-text-surface">
+        <Header />
+      </div>
+
+      <div className="flex flex-1 overflow-hidden">
+        <div className="w-16 flex-shrink-0 c-text-surface">
+          <Sider />
+        </div>
+
+        <div className="flex-1 overflow-auto bg-background p-4 rounded-tl-xl">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Outlet />
+          </Suspense>
+        </div>
+      </div>
     </div>
   )
 }
