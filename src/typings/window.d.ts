@@ -45,8 +45,8 @@ interface Window {
 
 declare interface Navigator {
   userAgentData?: {
-    platform?: string;
-    mobile?: boolean;
-    brands?: Array<{ brand: string; version: string }>;
-  };
+    platform?: string
+    mobile?: boolean
+    brands?: Array<{ brand: string; version: string }>
+  }
 }

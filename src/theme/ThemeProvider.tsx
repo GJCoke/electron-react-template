@@ -7,7 +7,6 @@ const THEME_STORAGE_KEY = "theme-mode"
 const LAYOUT_STORAGE_KEY = "layout-mode"
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-
   const getInitialLayout = (): LayoutType => {
     const stored = localStorage.getItem(LAYOUT_STORAGE_KEY) as LayoutType | null
     return stored || "default"

@@ -34,14 +34,16 @@ const WindowControls: React.FC<WindowControlsProps> = ({ className, style }) => 
   }, [])
 
   return (
-    notMac && <div className={`absolute top-1 right-1 flex z-100 ${className}`} style={style}>
-      <IconButton icon="qlementine-icons:windows-minimize-16" onClick={handelMinimize} />
-      <IconButton
-        icon={isMaximize ? "qlementine-icons:windows-unmaximize-16" : "qlementine-icons:windows-maximize-16"}
-        onClick={handelMaximize}
-      />
-      <IconButton icon="qlementine-icons:windows-close-16" onClick={handelClose} />
-    </div>
+    notMac && (
+      <div className={`absolute top-1 right-1 flex z-100 ${className}`} style={style}>
+        <IconButton icon="qlementine-icons:windows-minimize-16" onClick={handelMinimize} />
+        <IconButton
+          icon={isMaximize ? "qlementine-icons:windows-unmaximize-16" : "qlementine-icons:windows-maximize-16"}
+          onClick={handelMaximize}
+        />
+        <IconButton icon="qlementine-icons:windows-close-16" onClick={handelClose} />
+      </div>
+    )
   )
 }
 

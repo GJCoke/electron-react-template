@@ -12,7 +12,6 @@ export interface UpdateProps {
 }
 
 const Update: React.FC<UpdateProps> = ({ className, style, model }) => {
-
   const layoutModel = model ?? "vertical"
   const [show, setShow] = useState<boolean>(false)
   const [title, setTitle] = useState<string>("")
@@ -104,11 +103,7 @@ const Update: React.FC<UpdateProps> = ({ className, style, model }) => {
   )
 
   return (
-    <div
-      className={`${className} ${!show ? "hidden" : ""}`}
-      style={style}
-      onDoubleClick={(e) => e.stopPropagation()}
-    >
+    <div className={`${className} ${!show ? "hidden" : ""}`} style={style} onDoubleClick={(e) => e.stopPropagation()}>
       <Modal
         open={openModal}
         title="重要更新"
@@ -132,18 +127,16 @@ const Update: React.FC<UpdateProps> = ({ className, style, model }) => {
         open={open}
         onOpenChange={handleOpenChange}
       >
-        {
-          layoutModel === "vertical" ? (
-            <div>
-              <IconButton className={error ? "c-red" : "c-green"} icon="line-md:uploading-loop" />
-            </div>
-          ) : (
-            <div className="flex gap-2 items-center cursor-pointer bg-gray-200/30 rounded-md p-1">
-              <SvgIcon className={`text-20px ${error ? "c-red" : "c-green"}`} icon="line-md:uploading-loop" />
-              <div className="font-bold select-none">存在新版本</div>
-            </div>
-          )
-        }
+        {layoutModel === "vertical" ? (
+          <div>
+            <IconButton className={error ? "c-red" : "c-green"} icon="line-md:uploading-loop" />
+          </div>
+        ) : (
+          <div className="flex gap-2 items-center cursor-pointer bg-gray-200/30 rounded-md p-1">
+            <SvgIcon className={`text-20px ${error ? "c-red" : "c-green"}`} icon="line-md:uploading-loop" />
+            <div className="font-bold select-none">存在新版本</div>
+          </div>
+        )}
       </Popover>
     </div>
   )
