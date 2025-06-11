@@ -1,10 +1,24 @@
 import React, { useState, useMemo, useEffect } from "react"
 import { ConfigProvider, theme as antdTheme } from "antd"
 import { ThemeContext, type ThemeMode, type ThemeContextType } from "@/hooks/useTheme"
+import { LayoutContext, type LayoutType } from "@/hooks/useLayout.ts"
 
 const THEME_STORAGE_KEY = "theme-mode"
+const LAYOUT_STORAGE_KEY = "layout-mode"
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
+  const getInitialLayout = (): LayoutType => {
+    const stored = localStorage.getItem(LAYOUT_STORAGE_KEY) as LayoutType | null
+    return stored || "default"
+  }
+
+  const [layout, setLayout] = useState<LayoutType>(getInitialLayout)
+
+  useEffect(() => {
+    localStorage.setItem(LAYOUT_STORAGE_KEY, layout)
+  }, [layout])
+
   const getInitialTheme = (): ThemeMode => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null
     if (stored === "light" || stored === "dark") return stored
@@ -53,7 +67,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   return (
     <ThemeContext.Provider value={{ mode, toggleTheme, themeConfig }}>
-      <ConfigProvider theme={themeConfig}>{children}</ConfigProvider>
+      <LayoutContext.Provider value={{ layout, setLayout }}>
+        <ConfigProvider theme={themeConfig}>{children}</ConfigProvider>
+      </LayoutContext.Provider>
     </ThemeContext.Provider>
   )
 }

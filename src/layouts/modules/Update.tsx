@@ -1,8 +1,19 @@
-import React, { useEffect, useRef, useState } from "react"
-import IconButton from "./IconButton"
+import React, { type CSSProperties, useEffect, useRef, useState } from "react"
+import IconButton from "./IconButton.tsx"
 import { Button, Modal, Popover } from "antd"
+import SvgIcon from "@/components/SvgIcon.tsx"
 
-const Update: React.FC = () => {
+export type Model = "horizontal" | "vertical"
+
+export interface UpdateProps {
+  className?: string
+  style?: CSSProperties
+  model?: Model
+}
+
+const Update: React.FC<UpdateProps> = ({ className, style, model }) => {
+
+  const layoutModel = model ?? "vertical"
   const [show, setShow] = useState<boolean>(false)
   const [title, setTitle] = useState<string>("")
   const [error, setError] = useState<boolean>(false)
@@ -93,7 +104,11 @@ const Update: React.FC = () => {
   )
 
   return (
-    <div className={!show ? "hidden" : ""} onDoubleClick={(e) => e.stopPropagation()}>
+    <div
+      className={`${className} ${!show ? "hidden" : ""}`}
+      style={style}
+      onDoubleClick={(e) => e.stopPropagation()}
+    >
       <Modal
         open={openModal}
         title="重要更新"
@@ -117,9 +132,18 @@ const Update: React.FC = () => {
         open={open}
         onOpenChange={handleOpenChange}
       >
-        <div>
-          <IconButton className={error ? "c-red" : "c-green"} icon="line-md:uploading-loop" />
-        </div>
+        {
+          layoutModel === "vertical" ? (
+            <div>
+              <IconButton className={error ? "c-red" : "c-green"} icon="line-md:uploading-loop" />
+            </div>
+          ) : (
+            <div className="flex gap-2 items-center cursor-pointer bg-gray-200/30 rounded-md p-1">
+              <SvgIcon className={`text-20px ${error ? "c-red" : "c-green"}`} icon="line-md:uploading-loop" />
+              <div className="font-bold select-none">存在新版本</div>
+            </div>
+          )
+        }
       </Popover>
     </div>
   )

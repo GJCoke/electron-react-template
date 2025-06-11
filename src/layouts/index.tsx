@@ -1,29 +1,18 @@
-import React, { Suspense } from "react"
-import { Outlet } from "react-router-dom"
-import LoadingSpinner from "../components/LoadingSpinner"
-import Header from "./header"
-import Sider from "./sider"
+import React from "react"
+import DefaultLayout from "./base-layout"
+import CompactLayout from "./sidebar-layout"
+import { useLayout } from "@/hooks/useLayout"
 
 const Layouts: React.FC = () => {
-  return (
-    <div className="w-screen h-screen flex flex-col surface">
-      <div className="h-11 flex-shrink-0 c-text-surface">
-        <Header />
-      </div>
+  const { layout } = useLayout()
 
-      <div className="flex flex-1 overflow-hidden">
-        <div className="w-16 flex-shrink-0 c-text-surface">
-          <Sider />
-        </div>
-
-        <div className="flex-1 overflow-auto bg-background p-4 rounded-tl-xl">
-          <Suspense fallback={<LoadingSpinner />}>
-            <Outlet />
-          </Suspense>
-        </div>
-      </div>
-    </div>
-  )
+  switch (layout) {
+    case "sidebar":
+      return <CompactLayout />
+    case "default":
+    default:
+      return <DefaultLayout />
+  }
 }
 
 export default Layouts

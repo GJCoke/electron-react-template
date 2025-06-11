@@ -42,3 +42,11 @@ interface Window {
     themeSet: <K extends keyof ThemeStore>(key: K, value: ThemeStore[K]) => Promise<boolean>
   }
 }
+
+declare interface Navigator {
+  userAgentData?: {
+    platform?: string;
+    mobile?: boolean;
+    brands?: Array<{ brand: string; version: string }>;
+  };
+}

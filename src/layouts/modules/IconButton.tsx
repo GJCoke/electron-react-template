@@ -1,4 +1,4 @@
-import SvgIcon from "@/components/SvgIcon"
+import SvgIcon from "@/components/SvgIcon.tsx"
 import React, { type CSSProperties } from "react"
 
 export interface IconButtonProps {
@@ -16,7 +16,6 @@ const IconButton: React.FC<IconButtonProps> = ({ icon, className, style, onClick
       onDoubleClick={(e) => e.stopPropagation()}
       onClick={onClick}
     >
-      {/* no message: line-md:bell-loop */}
       <SvgIcon className="text-20px" icon={icon} />
     </div>
   )

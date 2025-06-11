@@ -1,7 +1,8 @@
 import { Avatar as AntdAvatar, Dropdown, type MenuProps, theme } from "antd"
-import { useTheme } from "@/hooks/useTheme"
+import { useTheme } from "@/hooks/useTheme.ts"
 import React from "react"
-import SvgIcon from "@/components/SvgIcon"
+import SvgIcon from "@/components/SvgIcon.tsx"
+import { useLayout } from "@/hooks/useLayout.ts"
 
 const { useToken } = theme
 
@@ -17,7 +18,17 @@ const Avatar = () => {
     width: "225px",
   }
 
+  const { setLayout } = useLayout()
+
   const items: MenuProps["items"] = [
+    {
+      key: "7",
+      label: "默认布局",
+    },
+    {
+      key: "6",
+      label: "简约布局",
+    },
     {
       key: "5",
       label: "切换主题",
@@ -58,6 +69,10 @@ const Avatar = () => {
   const handelMenuClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "5") {
       toggleTheme()
+    } else if (key === "6") {
+      setLayout("sidebar")
+    } else if (key === "7") {
+      setLayout("default")
     }
   }
 

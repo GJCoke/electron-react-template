@@ -1,6 +1,6 @@
 import { lazy } from "react"
 import { Navigate, type RouteObject } from "react-router-dom"
-import MainLayout from "@/layouts"
+import Layouts from "@/layouts"
 
 // 懒加载页面
 const Dashboard = lazy(() => import("@/views/Home"))
@@ -12,7 +12,7 @@ const ElectronPage = lazy(() => import("@/views/electron"))
 export const routes: RouteObject[] = [
   {
     path: "/",
-    element: <MainLayout />,
+    element: <Layouts />,
     children: [
       { index: true, element: <Navigate to="message" replace /> },
       {

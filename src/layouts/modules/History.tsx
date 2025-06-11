@@ -1,4 +1,4 @@
-import IconButton from "./IconButton"
+import IconButton from "./IconButton.tsx"
 import React from "react"
 
 const History: React.FC = () => {

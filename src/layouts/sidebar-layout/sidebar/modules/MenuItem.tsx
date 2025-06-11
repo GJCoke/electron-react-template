@@ -1,5 +1,5 @@
 import React, { type CSSProperties } from "react"
-import SvgIcon from "@/components/SvgIcon"
+import SvgIcon from "@/components/SvgIcon.tsx"
 import { useNavigate } from "react-router-dom"
 
 interface MenuItemProps {
@@ -17,16 +17,14 @@ const MenuItem: React.FC<MenuItemProps> = ({ className, style, title, icon, loca
 
   return (
     <div
-      className={`${className} rounded-lg flex flex-col items-center justify-center hover:bg-hover hover:c-primary-active cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
+      className={`${className} rounded-md flex items-center gap-2 p-1 hover:bg-hover hover:c-primary-active cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
       style={style}
       onClick={() => {
         to && navigation(to)
       }}
     >
-      <div>
-        <SvgIcon className="text-22px" icon={icon} localIcon={localIcon} />
-      </div>
-      <div className="text-10px font-black">{title}</div>
+      <SvgIcon className="text-20px" icon={icon} localIcon={localIcon} />
+      <div className="font-bold">{title}</div>
     </div>
   )
 }

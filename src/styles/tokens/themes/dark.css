@@ -3,10 +3,14 @@
   --color-hover: rgba(255, 255, 255, 0.2);
   --color-bg: #000000;
   --color-text-content: #ffffff;
+  /*--color-surface-bg:*/
+  /*  radial-gradient(circle at 20% 30%, #353c48 0%, transparent 60%),*/
+  /*  radial-gradient(circle at 80% 40%, #222731 0%, transparent 70%),*/
+  /*  radial-gradient(circle at top left, #353c48 0%, #13151e 100%);*/
   --color-surface-bg:
-    radial-gradient(circle at 20% 30%, #353c48 0%, transparent 60%),
-    radial-gradient(circle at 80% 40%, #222731 0%, transparent 70%),
-    radial-gradient(circle at top left, #353c48 0%, #13151e 100%);
+    linear-gradient(217deg, rgba(34, 39, 49, 1), rgba(34, 39, 49, 0.5) 70.71%),
+    linear-gradient(127deg, rgba(34, 39, 49, 1), rgba(34, 39, 49, 0.5) 70.71%),
+    linear-gradient(336deg, rgba(53, 60, 72, 1), rgba(34, 39, 49, 0.5) 70.71%);
 
   /** text */
   --base-text-color: #ffffff;

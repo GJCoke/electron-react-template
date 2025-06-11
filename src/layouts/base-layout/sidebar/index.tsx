@@ -1,11 +1,12 @@
 import React, { type CSSProperties, useEffect, useRef, useState } from "react"
 import { Popover } from "antd"
-import MenuItem from "./modules/MenuItem"
+import MenuItem from "./modules/MenuItem.tsx"
 import { routes } from "@/router"
 import { useLocation, useNavigate } from "react-router-dom"
-import SvgIcon from "@/components/SvgIcon"
+import SvgIcon from "@/components/SvgIcon.tsx"
+import { normalizeTo } from "@/utils/utils.ts"
 
-interface SiderProps {
+interface SidebarProps {
   className?: string
   style?: CSSProperties
 }
@@ -13,7 +14,7 @@ interface SiderProps {
 const MENU_ITEM_HEIGHT = 56
 const MENU_ITEM_GAP = 2
 
-const Sider: React.FC<SiderProps> = ({ className, style }) => {
+const Sidebar: React.FC<SidebarProps> = ({ className, style }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const navigation = useNavigate()
   const [maxVisibleItems, setMaxVisibleItems] = useState(0)
@@ -42,11 +43,6 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
   const overflowItems = sidebarRoutes.slice(maxVisibleItems)
 
   const location = useLocation()
-
-  const normalizeTo = (to?: string) => {
-    if (!to) return "/"
-    return to.startsWith("/") ? to : `/${to}`
-  }
 
   const activeVisibleIndex = visibleItems.findIndex((item) => location.pathname === normalizeTo(item.path))
 
@@ -116,4 +112,4 @@ const Sider: React.FC<SiderProps> = ({ className, style }) => {
   )
 }
 
-export default Sider
+export default Sidebar
