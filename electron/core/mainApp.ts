@@ -76,7 +76,6 @@ export class MainApp {
   }
 
   private setupMenu() {
-
     const devMenu: MenuItemConstructorOptions = {
       label: "开发工具",
       submenu: [
@@ -88,7 +87,7 @@ export class MainApp {
           click: () => shell.openPath(logger.getFilePath()),
           accelerator: "CommandOrControl+Alt+L",
         },
-      ]
+      ],
     }
 
     const template: MenuItemConstructorOptions[] = [
@@ -108,14 +107,14 @@ export class MainApp {
           { role: "pasteAndMatchStyle", label: "粘贴并匹配样式" },
           { role: "selectAll", label: "全选" },
         ],
-      }
+      },
     ]
 
     isDebug && template.push(devMenu)
 
     this.menuManager.createMenu({
       key: "main",
-      template
+      template,
     })
   }
 
