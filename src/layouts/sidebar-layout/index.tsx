@@ -17,7 +17,7 @@ const CompactLayout: React.FC = () => {
         </div>
 
         <div className="flex flex-1 pr-2 pb-2">
-          <div className="flex-1 overflow-auto bg-background rounded-xl p-4">
+          <div className="flex-1 overflow-auto bg-background rounded-xl">
             <Suspense fallback={<LoadingSpinner />}>
               <Outlet />
             </Suspense>

@@ -16,7 +16,7 @@ const BaseLayout: React.FC = () => {
           <Sidebar />
         </div>
 
-        <div className="flex-1 overflow-auto bg-background p-4 rounded-tl-xl">
+        <div className="flex-1 overflow-auto bg-background rounded-tl-xl">
           <Suspense fallback={<LoadingSpinner />}>
             <Outlet />
           </Suspense>

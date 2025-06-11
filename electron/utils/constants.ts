@@ -13,5 +13,5 @@ export const VITE_DEV_SERVER_URL = import.meta.env.VITE_DEV_SERVER_URL
 
 export const preloadPath = join(__dirname, "./preload/index.mjs")
 export const indexHtml = join(__dirname, "../dist/index.html")
-export const loadingHtml = join(__dirname, "../dist/loading.html")
+export const loadingHtml = isDebug ? join(__dirname, "../public/loading.html") : join(__dirname, "../dist/loading.html")
 export const DownloadsPath = app.getPath("downloads")

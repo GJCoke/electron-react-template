@@ -3,12 +3,14 @@ import { useTheme } from "@/hooks/useTheme.ts"
 import React from "react"
 import SvgIcon from "@/components/SvgIcon.tsx"
 import { useLayout } from "@/hooks/useLayout.ts"
+import { useNavigate } from "react-router-dom"
 
 const { useToken } = theme
 
 const Avatar = () => {
   const { toggleTheme } = useTheme()
   const { token } = useToken()
+  const navigation = useNavigate()
 
   const contentStyle: React.CSSProperties = {
     backgroundColor: token.colorBgElevated,
@@ -73,6 +75,8 @@ const Avatar = () => {
       setLayout("sidebar")
     } else if (key === "7") {
       setLayout("default")
+    } else if (key === "2") {
+      navigation("/settings")
     }
   }
 
