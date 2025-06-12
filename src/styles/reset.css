@@ -29,3 +29,14 @@ a:hover {
 .custom-popover .ant-popover-inner {
   padding: 4px;
 }
+
+/*::-webkit-scrollbar {*/
+/*  width: 8px;*/
+/*}*/
+/*::-webkit-scrollbar-track {*/
+/*  background: transparent;*/
+/*}*/
+/*::-webkit-scrollbar-thumb {*/
+/*  background-color: color-mix(in srgb, var(--base-text-color) 40%, transparent);*/
+/*  border-radius: 9999px;*/
+/*}*/
