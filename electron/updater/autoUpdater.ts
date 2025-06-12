@@ -14,7 +14,7 @@ const logger = new Logger("Updater")
 
 // dev auto updater.
 // dev env updater test need project dir add dev-app-update.yml file
-autoUpdater.forceDevUpdateConfig = true
+// autoUpdater.forceDevUpdateConfig = true
 
 export class AppUpdater {
   private win: BrowserWindow
