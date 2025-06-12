@@ -15,7 +15,9 @@ const Search: React.FC<SearchProps> = ({ className, style }) => {
       onDoubleClick={(e) => e.stopPropagation()}
     >
       <SvgIcon className="text-20px" icon="iconoir:search" />
-      <span className="select-none">搜索（{getCtrlOrCommandSymbol()} + K）</span>
+      <span className="select-none">
+        搜索<span className="text-14px">（{getCtrlOrCommandSymbol()} + K）</span>
+      </span>
     </div>
   )
 }
