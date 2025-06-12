@@ -33,6 +33,8 @@ export default defineConfig({
       linkHover: "var(--color-text-link-hover)",
       error: "var(--color-text-error)",
       hover: "var(--color-hover)",
+      border: "var(--border-color)",
+      active: "var(--active-color)",
     },
   },
 })

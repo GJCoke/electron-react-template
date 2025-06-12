@@ -42,7 +42,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     window.electronStore?.themeSet("backgroundColor", cssBackgroundValue).then()
   }, [mode])
 
-  const toggleTheme = () => setMode((prev) => (prev === "light" ? "dark" : "light"))
+  const setTheme = (mode: ThemeMode) => setMode(mode)
 
   const themeConfig: ThemeContextType["themeConfig"] = useMemo(() => {
     return {
@@ -65,7 +65,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [mode])
 
   return (
-    <ThemeContext.Provider value={{ mode, toggleTheme, themeConfig }}>
+    <ThemeContext.Provider value={{ mode, setTheme, themeConfig }}>
       <LayoutContext.Provider value={{ layout, setLayout }}>
         <ConfigProvider theme={themeConfig}>{children}</ConfigProvider>
       </LayoutContext.Provider>

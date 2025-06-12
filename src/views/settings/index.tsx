@@ -1,11 +1,14 @@
 import React from "react"
 import SettingHeader from "./modules/SettingHeader.tsx"
+import GeneralSettings from "./modules/GeneralSettings.tsx"
 
 const Settings: React.FC = () => {
   return (
     <div>
       <SettingHeader />
-      <div>设置页面</div>
+      <div className="p-4">
+        <GeneralSettings />
+      </div>
     </div>
   )
 }
