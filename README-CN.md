@@ -11,16 +11,17 @@
 
 ![img.png](docs/images/img.png)
 ![img.png](docs/images/dark.png)
+
 ---
 
 ## 特性 / Features
 
-* 使用 Vite 作为构建工具，极速开发体验
-* 使用 React + TypeScript 构建渲染进程
-* 主进程模块化、面向对象封装
-* 多环境支持（.env 管理）
-* ESLint + Prettier 格式类型检查
-* 预设测试环境（可扩展）
+- 使用 Vite 作为构建工具，极速开发体验
+- 使用 React + TypeScript 构建渲染进程
+- 主进程模块化、面向对象封装
+- 多环境支持（.env 管理）
+- ESLint + Prettier 格式类型检查
+- 预设测试环境（可扩展）
 
 ---
 
@@ -77,37 +78,36 @@ pnpm build:mac/win/linux
 
 ## 常用脚本 / Common Scripts
 
-| 命令             | 说明                       |
-|----------------|--------------------------|
-| `pnpm dev`     | 启动 Electron + React 开发环境 |
-| `pnpm build`   | 构建生产版本应用                 |
-| `pnpm lint`    | 检查代码格式                   |
-| `pnpm format`  | 格式化代码                    |
+| 命令          | 说明                           |
+| ------------- | ------------------------------ |
+| `pnpm dev`    | 启动 Electron + React 开发环境 |
+| `pnpm build`  | 构建生产版本应用               |
+| `pnpm lint`   | 检查代码格式                   |
+| `pnpm format` | 格式化代码                     |
 
 ---
 
 ## 技术栈 / Tech Stack
 
-* [Electron](https://www.electronjs.org/)
-* [React](https://react.dev/)
-* [Vite](https://vitejs.dev/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [pnpm](https://pnpm.io/)
+- [Electron](https://www.electronjs.org/)
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [pnpm](https://pnpm.io/)
 
 ---
 
 ## 开发建议 / Tips
 
-* 主进程建议使用 class 进行模块化封装（如 MainApp，WindowManager）
-* 使用 `preload.ts` 安全地链接主进程和渲染层
-* 多环境变量请使用 `.env.[mode]` 文件管理
+- 主进程建议使用 class 进行模块化封装（如 MainApp，WindowManager）
+- 使用 `preload.ts` 安全地链接主进程和渲染层
+- 多环境变量请使用 `.env.[mode]` 文件管理
 
 ---
 
 ## 许可证
 
-本项目基于 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
----
+## 本项目基于 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
 
 ## 联系我 / Contact
 

@@ -17,12 +17,12 @@ This project is a desktop application template built using Electron and React. I
 
 ## Features
 
-* Lightning-fast development experience using Vite
-* Renderer process built with React + TypeScript
-* Modular and object-oriented main process structure
-* Multi-environment support via `.env` files
-* ESLint + Prettier for formatting and type checking
-* Pre-configured testing environment (extensible)
+- Lightning-fast development experience using Vite
+- Renderer process built with React + TypeScript
+- Modular and object-oriented main process structure
+- Multi-environment support via `.env` files
+- ESLint + Prettier for formatting and type checking
+- Pre-configured testing environment (extensible)
 
 ---
 
@@ -90,19 +90,19 @@ The build output will be located in the `dist-*` directory.
 
 ## Tech Stack
 
-* [Electron](https://www.electronjs.org/)
-* [React](https://react.dev/)
-* [Vite](https://vitejs.dev/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [pnpm](https://pnpm.io/)
+- [Electron](https://www.electronjs.org/)
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [pnpm](https://pnpm.io/)
 
 ---
 
 ## Tips
 
-* It is recommended to modularize the main process using classes (e.g., MainApp, WindowManager)
-* Use `preload.ts` to securely bridge the main and renderer processes
-* Manage multiple environments with `.env.[mode]` files
+- It is recommended to modularize the main process using classes (e.g., MainApp, WindowManager)
+- Use `preload.ts` to securely bridge the main and renderer processes
+- Manage multiple environments with `.env.[mode]` files
 
 ---
 
