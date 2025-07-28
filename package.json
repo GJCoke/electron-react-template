@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build && electron-builder --mac --win --linux",
     "build:win": "tsc -b && vite build && electron-builder --win --x64",
-    "build:mac": "tsc -b && vite build && electron-builder --mac",
+    "build:mac": "tsc -b && vite build && electron-builder --mac --universal",
     "build:linux": "tsc -b && vite build && electron-builder --linux",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx --fix",
