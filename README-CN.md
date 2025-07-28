@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./docs/images/logo.svg" width="160" alt="FastAPI">
   <h1>Electron React Template</h1>
-  <span><a href="./README-CN.md">English</a> | 中文</span>
+  <span><a href="./README.md">English</a> | 中文</span>
 </div>
 ## 项目简介
 
