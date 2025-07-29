@@ -78,12 +78,12 @@ pnpm build:mac/win/linux
 
 ## 常用脚本 / Common Scripts
 
-| 命令          | 说明                           |
-| ------------- | ------------------------------ |
+| 命令            | 说明                       |
+|---------------|--------------------------|
 | `pnpm dev`    | 启动 Electron + React 开发环境 |
-| `pnpm build`  | 构建生产版本应用               |
+| `pnpm build`  | 构建生产版本应用                 |
 | `pnpm lint`   | 检查代码格式                   |
-| `pnpm format` | 格式化代码                     |
+| `pnpm format` | 格式化代码                    |
 
 ---
 
