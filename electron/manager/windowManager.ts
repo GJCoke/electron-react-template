@@ -1,7 +1,7 @@
 import { BrowserWindow } from "electron"
-import { IpcHandler } from "../core/ipcHandler.ts"
-import { indexHtml, loadingHtml, preloadPath, VITE_DEV_SERVER_URL } from "../utils/constants.ts"
-import { StoreManager } from "./storeManager.ts"
+import { IpcHandler } from "../core/ipcHandler"
+import { indexHtml, loadingHtml, preloadPath, VITE_DEV_SERVER_URL } from "../utils/constants"
+import { StoreManager } from "./storeManager"
 
 export class WindowManager {
   private windows = new Map<string, BrowserWindow>()

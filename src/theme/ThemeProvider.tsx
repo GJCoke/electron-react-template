@@ -1,12 +1,15 @@
 import React, { useState, useMemo, useEffect } from "react"
-import { ConfigProvider, theme as antdTheme } from "antd"
+import { ConfigProvider, theme as antdTheme, message as AntdMessage } from "antd"
 import { ThemeContext, type ThemeMode, type ThemeContextType } from "@/hooks/useTheme"
-import { LayoutContext, type LayoutType } from "@/hooks/useLayout.ts"
+import { LayoutContext, type LayoutType } from "@/hooks/useLayout"
+import zhCN from "antd/locale/zh_CN"
 
 const THEME_STORAGE_KEY = "theme-mode"
 const LAYOUT_STORAGE_KEY = "layout-mode"
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  AntdMessage.config({ top: 50 })
+
   const getInitialLayout = (): LayoutType => {
     const stored = localStorage.getItem(LAYOUT_STORAGE_KEY) as LayoutType | null
     return stored || "default"
@@ -67,7 +70,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   return (
     <ThemeContext.Provider value={{ mode, setTheme, themeConfig }}>
       <LayoutContext.Provider value={{ layout, setLayout }}>
-        <ConfigProvider theme={themeConfig}>{children}</ConfigProvider>
+        <ConfigProvider theme={themeConfig} locale={zhCN}>
+          {children}
+        </ConfigProvider>
       </LayoutContext.Provider>
     </ThemeContext.Provider>
   )

@@ -1,5 +1,5 @@
 import React from "react"
-import IconButton from "./IconButton.tsx"
+import IconButton from "./IconButton"
 
 const Help: React.FC = () => {
   return (

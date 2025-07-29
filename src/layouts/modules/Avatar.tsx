@@ -1,6 +1,6 @@
 import { Avatar as AntdAvatar, Dropdown, type MenuProps, theme } from "antd"
 import React from "react"
-import SvgIcon from "@/components/SvgIcon.tsx"
+import SvgIcon from "@/components/SvgIcon"
 import { useNavigate } from "react-router-dom"
 
 const { useToken } = theme

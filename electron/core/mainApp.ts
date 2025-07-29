@@ -5,8 +5,8 @@ import { Logger } from "../utils/logger"
 import { TrayManager } from "../manager/trayManager"
 import { MenuManager } from "../manager/menuManager"
 import { AppUpdater } from "../updater/autoUpdater"
-import { StoreManager } from "../manager/storeManager.ts"
-import { isDebug } from "../utils/constants.ts"
+import { StoreManager } from "../manager/storeManager"
+import { isDebug } from "../utils/constants"
 
 const logger = new Logger("MainProcess")
 

@@ -1,8 +1,8 @@
 import React from "react"
-import RadioCard from "@/views/settings/modules/RadioCard.tsx"
+import RadioCard from "@/views/settings/modules/RadioCard"
 import { Radio } from "antd"
-import { type ThemeMode, useTheme } from "@/hooks/useTheme.ts"
-import { type LayoutType, useLayout } from "@/hooks/useLayout.ts"
+import { type ThemeMode, useTheme } from "@/hooks/useTheme"
+import { type LayoutType, useLayout } from "@/hooks/useLayout"
 
 interface ThemeProps {
   className?: string

@@ -1,12 +1,12 @@
 import { Layout } from "antd"
-import Avatar from "@/layouts/modules/Avatar.tsx"
+import Avatar from "@/layouts/modules/Avatar"
 import React from "react"
-import Update from "@/layouts/modules/Update.tsx"
-import Help from "@/layouts/modules/Help.tsx"
-import Notification from "@/layouts/modules/Notification.tsx"
-import Push from "@/layouts/modules/Push.tsx"
-import History from "@/layouts/modules/History.tsx"
-import Search from "@/layouts/modules/Search.tsx"
+import Update from "@/layouts/modules/Update"
+import Help from "@/layouts/modules/Help"
+import Notification from "@/layouts/modules/Notification"
+import Push from "@/layouts/modules/Push"
+import History from "@/layouts/modules/History"
+import Search from "@/layouts/modules/Search"
 
 interface Props {
   className?: string

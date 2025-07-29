@@ -1,6 +1,6 @@
-import SvgIcon from "@/components/SvgIcon.tsx"
+import SvgIcon from "@/components/SvgIcon"
 import React, { type CSSProperties } from "react"
-import { getCtrlOrCommandSymbol } from "@/utils/utils.ts"
+import { getCtrlOrCommandSymbol } from "@/utils/utils"
 
 export interface SearchProps {
   className?: string

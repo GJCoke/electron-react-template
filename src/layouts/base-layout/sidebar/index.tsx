@@ -1,10 +1,10 @@
 import React, { type CSSProperties, useEffect, useRef, useState } from "react"
 import { Popover } from "antd"
-import MenuItem from "./modules/MenuItem.tsx"
-import { routes } from "@/router"
-import { useLocation, useNavigate } from "react-router-dom"
-import SvgIcon from "@/components/SvgIcon.tsx"
-import { normalizeTo } from "@/utils/utils.ts"
+import MenuItem from "./modules/MenuItem"
+import { useNavigate } from "react-router-dom"
+import SvgIcon from "@/components/SvgIcon"
+import { normalizeTo } from "@/utils/utils"
+import { useSidebarRoutes } from "@/hooks/useSidebar"
 
 interface SidebarProps {
   className?: string
@@ -12,14 +12,14 @@ interface SidebarProps {
 }
 
 const MENU_ITEM_HEIGHT = 56
-const MENU_ITEM_GAP = 2
+const MENU_ITEM_GAP = 4
 
 const Sidebar: React.FC<SidebarProps> = ({ className, style }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const navigation = useNavigate()
   const [maxVisibleItems, setMaxVisibleItems] = useState(0)
-  const sidebarRoutes = (routes[0].children || []).filter((r) => !r.handle?.hidden && !r.index)
   const [open, setOpen] = useState(false)
+  const { activeVisibleIndex, currentBindPath, location, sidebarRoutes } = useSidebarRoutes()
 
   useEffect(() => {
     const el = containerRef.current
@@ -42,12 +42,9 @@ const Sidebar: React.FC<SidebarProps> = ({ className, style }) => {
   const visibleItems = sidebarRoutes.slice(0, maxVisibleItems)
   const overflowItems = sidebarRoutes.slice(maxVisibleItems)
 
-  const location = useLocation()
-
-  const activeVisibleIndex = visibleItems.findIndex((item) => location.pathname === normalizeTo(item.path))
-
-  // 判断 overflowItems 中是否有激活的
-  const isMoreActive = overflowItems.some((item) => location.pathname === normalizeTo(item.path))
+  const isMoreActive = overflowItems.some(
+    (item) => normalizeTo(item.path) === location.pathname || normalizeTo(item.path) === currentBindPath
+  )
 
   return (
     <div className={`${className} w-16 h-full`} style={style} ref={containerRef}>
@@ -79,13 +76,13 @@ const Sidebar: React.FC<SidebarProps> = ({ className, style }) => {
                   return (
                     <div
                       key={i}
-                      className={`flex items-center w-140px p-3 gap-3 hover:bg-hover rounded-lg cursor-pointer select-none ${isActive ? "bg-hover c-primary-active" : ""}`}
+                      className={`flex items-center w-140px p-3 gap-3 hover:bg-hover rounded-lg cursor-pointer select-none ${isActive ? "bg-hover c-theme-primary-active" : ""}`}
                       onClick={() => {
                         navigation(item.path || "/")
                         setOpen(false)
                       }}
                     >
-                      <SvgIcon localIcon={item.handle.localIcon} icon={item.handle.icon} className="text-22px" />
+                      <SvgIcon localIcon={item.handle.localIcon} icon={item.handle.icon} className="text-20px" />
                       {item.handle.title}
                     </div>
                   )

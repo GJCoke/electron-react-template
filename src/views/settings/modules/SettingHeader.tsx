@@ -1,5 +1,5 @@
 import React from "react"
-import SvgIcon from "@/components/SvgIcon.tsx"
+import SvgIcon from "@/components/SvgIcon"
 import { useNavigate } from "react-router-dom"
 
 const SettingHeader: React.FC = () => {

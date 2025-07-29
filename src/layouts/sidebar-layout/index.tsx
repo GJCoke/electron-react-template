@@ -2,7 +2,7 @@ import React, { Suspense } from "react"
 import { Outlet } from "react-router-dom"
 import LoadingSpinner from "@/components/LoadingSpinner"
 import Sidebar from "./sidebar"
-import WindowControls from "@/layouts/modules/WindowControls.tsx"
+import WindowControls from "@/layouts/modules/WindowControls"
 
 const CompactLayout: React.FC = () => {
   return (

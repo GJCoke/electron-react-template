@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import LeftHeader from "./layouts/LeftHeader.tsx"
-import RightHeader from "./layouts/RightHeader.tsx"
+import LeftHeader from "./layouts/LeftHeader"
+import RightHeader from "./layouts/RightHeader"
 
 export type Layout = "left-header" | "right-header"
 

@@ -1,4 +1,4 @@
-import SvgIcon from "@/components/SvgIcon.tsx"
+import SvgIcon from "@/components/SvgIcon"
 import React, { type CSSProperties } from "react"
 
 export interface IconButtonProps {

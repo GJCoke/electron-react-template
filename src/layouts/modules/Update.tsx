@@ -1,7 +1,7 @@
 import React, { type CSSProperties, useEffect, useRef, useState } from "react"
-import IconButton from "./IconButton.tsx"
+import IconButton from "./IconButton"
 import { Button, Modal, Popover } from "antd"
-import SvgIcon from "@/components/SvgIcon.tsx"
+import SvgIcon from "@/components/SvgIcon"
 
 export type Model = "horizontal" | "vertical"
 

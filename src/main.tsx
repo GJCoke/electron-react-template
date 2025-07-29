@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import "virtual:svg-icons-register"
-import App from "./App.tsx"
+import App from "./App"
 import "uno.css"
 import "./styles/index.css"
 import { ThemeProvider } from "./theme/ThemeProvider"

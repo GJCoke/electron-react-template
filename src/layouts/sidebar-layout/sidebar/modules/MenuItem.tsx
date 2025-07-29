@@ -1,5 +1,5 @@
 import React, { type CSSProperties } from "react"
-import SvgIcon from "@/components/SvgIcon.tsx"
+import SvgIcon from "@/components/SvgIcon"
 import { useNavigate } from "react-router-dom"
 
 interface MenuItemProps {

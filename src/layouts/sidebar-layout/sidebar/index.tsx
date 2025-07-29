@@ -1,17 +1,13 @@
-import Avatar from "@/layouts/modules/Avatar.tsx"
+import Avatar from "@/layouts/modules/Avatar"
 import React from "react"
-import Push from "@/layouts/modules/Push.tsx"
-import Search from "@/layouts/modules/Search.tsx"
-import MenuItem from "./modules/MenuItem.tsx"
-import { routes } from "@/router"
-import { normalizeTo } from "@/utils/utils.ts"
-import { useLocation } from "react-router-dom"
-import Update from "@/layouts/modules/Update.tsx"
+import Push from "@/layouts/modules/Push"
+import Search from "@/layouts/modules/Search"
+import MenuItem from "./modules/MenuItem"
+import Update from "@/layouts/modules/Update"
+import { useSidebarRoutes } from "@/hooks/useSidebar"
 
 const Sidebar: React.FC = () => {
-  const location = useLocation()
-  const sidebarRoutes = (routes[0].children || []).filter((r) => !r.handle?.hidden && !r.index)
-  const activeVisibleIndex = sidebarRoutes.findIndex((item) => location.pathname === normalizeTo(item.path))
+  const { sidebarRoutes, activeVisibleIndex } = useSidebarRoutes()
 
   return (
     <div className="flex flex-col gap-2 p-2 h-full">

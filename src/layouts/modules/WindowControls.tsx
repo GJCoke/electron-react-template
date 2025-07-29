@@ -1,4 +1,4 @@
-import IconButton from "@/layouts/modules/IconButton.tsx"
+import IconButton from "@/layouts/modules/IconButton"
 import React, { type CSSProperties, useEffect, useState } from "react"
 
 export interface WindowControlsProps {

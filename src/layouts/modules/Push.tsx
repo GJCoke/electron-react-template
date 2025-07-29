@@ -1,4 +1,4 @@
-import IconButton from "./IconButton.tsx"
+import IconButton from "./IconButton"
 import React from "react"
 
 const Push: React.FC = () => {

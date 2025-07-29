@@ -1,6 +1,6 @@
 import React from "react"
-import SettingHeader from "./modules/SettingHeader.tsx"
-import GeneralSettings from "./modules/GeneralSettings.tsx"
+import SettingHeader from "./modules/SettingHeader"
+import GeneralSettings from "./modules/GeneralSettings"
 
 const Settings: React.FC = () => {
   return (
